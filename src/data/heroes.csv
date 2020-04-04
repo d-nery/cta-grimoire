@@ -1,0 +1,100 @@
+id,name,element,rarity,class,atk,hp,def,ctkrate,ctkdmg,aps,atkrange,mvspeed,effresistance,frenzych,dodgerate,stunch,stuntm,atkaoe,ultatk,kshp,bonusgold,freezech,feezeexpldmg,burnch,burntm,burndmg,poisonch,poisontm,poisondmg
+blue_fish,Blue Fish,water,common,Magician,32,310,8,15,100,1.00,350,250,22,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+bugo_archer,Bugonaut Archer,water,common,Ranger,28,200,15,10,100,1.00,424,160,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+bugo_fighter,Bugonaut Fighter,water,common,Rogue,30,240,15,10,100,0.67,120,150,10,0,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+bugo_spear,Bugonaut Spear,water,common,Lancer,28,280,15,10,100,0.40,220,110,10,0,0,30,0,0,0,0,0,0,0,0,0,0,0,0,0
+bugo_giant,Bugonaut Giant,water,common,Barbarian,35,400,20,20,100,0.50,220,100,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ice_knight,Ice Knight,water,common,Knight,48,300,15,10,100,1.00,150,135,25,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+pirato,Pirato,water,rare,Gunner,28,200,6,10,100,0.83,408,180,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+rufus,Rufus,water,rare,Gunner,40,240,10,15,200,0.83,430,160,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+oceana,Océana,water,rare,Magician,40,360,8,10,100,0.67,520,160,20,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+goddess,Goddess ,water,rare,Support,14,200,10,10,100,0.50,520,140,26,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+snowman,Snowman,water,rare,Ranger,30,280,11,15,100,1.00,150,140,15,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+bb,Black Beard,water,rare,Knight,45,360,12,15,100,1.00,150,160,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+luka,Luka,water,rare,Rogue,37,240,8,10,100,1.00,120,220,15,0,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+mizu,Mizu,water,rare,Samurai,56,260,8,20,200,1.00,150,170,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+akwa,Akwa,water,rare,Brawler,48,360,20,20,100,1.00,200,140,24,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+atlantus,Atlantus,water,rare,Lancer,40,430,12,20,100,0.40,220,140,15,0,0,30,0,0,0,0,0,0,0,0,0,0,0,0,0
+namida,Namida,water,epic,Gunner,25,320,6,15,100,0.83,415,160,8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+valk,Valkyrie,water,epic,Ranger,32,280,12,20,100,1.00,550,150,8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+fq,Frost Queen,water,epic,Magician,28,280,12,20,100,1.00,520,150,8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ice_cube,Ice Cube,water,epic,Barbarian,45,580,14,10,100,0.83,150,100,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+vulcan_archer,Vulkan Archer,fire,common,Ranger,24,200,10,15,100,1.00,380,150,8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+vulcan_fighter,Vulcan Fighter,fire,common,Rogue,30,240,10,15,100,1.00,120,150,6,0,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+tiny_dragon,Tiny Dragon ,fire,common,Magician,38,210,8,15,100,1.00,300,180,18,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+vulcan_hammer,Vulcan Hammer,fire,common,Barbarian,45,400,10,15,100,0.50,130,110,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+mk,Monki King,fire,rare,Lancer,38,210,8,15,100,1.00,320,180,14,0,0,30,0,0,0,0,0,0,0,0,0,0,0,0,0
+fire_monk,Fire Monk,fire,rare,Magician,45,320,8,10,100,0.67,450,160,16,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+magmus,Magmus,fire,rare,Barbarian,65,500,18,15,100,0.50,220,100,7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+jasmine,Jasmine,fire,rare,Rogue,45,240,8,30,100,1.00,150,200,6,0,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+mv,Mecha Valken,fire,rare,Brawler,65,310,20,20,100,0.83,180,140,20,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+furiosa,Furiosa,fire,rare,Knight,60,340,14,20,100,1.00,150,150,8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+kasai,Kasai,fire,rare,Samurai,62,220,8,30,200,1.00,150,170,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+spyro,Spyro,fire,rare,Lancer,45,320,12,10,100,0.40,220,140,8,0,0,30,0,0,0,0,0,0,0,0,0,0,0,0,0
+xak,Xak,fire,rare,Support,20,180,10,10,100,0.67,420,170,22,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+spark,Spark,fire,rare,Ranger,36,250,8,25,100,1.00,505,170,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+scud,Scud,fire,epic,Gunner,35,210,8,15,100,0.83,400,160,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+torch,Torch,fire,epic,Gunner,40,220,10,10,100,0.71,345,125,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+alda,Alda,fire,epic,Ranger,38,240,6,25,100,1.00,555,150,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+voodoo_spear,Voodoo Spear,earth,common,Lancer,32,320,6,15,100,0.40,220,160,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+sprout,Sprout,earth,common,Magician,34,260,8,15,100,1.00,370,180,22,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+voodoo_archer,Voodoo Archer,earth,common,Ranger,24,240,6,15,100,1.00,425,160,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+voodoo_dagger,Voodoo Dagger,earth,common,Rogue,35,200,8,35,100,1.00,120,220,14,0,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+pumpking,Pumpking,earth,rare,Barbarian,40,550,20,15,100,0.83,220,100,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+groovine,Groovine,earth,rare,Magician,48,350,9,10,100,1.00,550,140,24,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+musashi,Musashi,earth,rare,Samurai,46,300,8,20,200,1.00,150,170,8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+rh,Robin Hood,earth,rare,Ranger,30,270,6,25,100,1.00,590,160,8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+glad,Gladiator,earth,rare,Barbarian,42,840,25,15,100,0.67,150,100,12,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+pinky,Pinky,earth,rare,Rogue,42,200,12,35,100,1.00,120,230,14,0,30,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+natura,Natura,earth,rare,Lancer,34,440,12,10,100,0.40,240,140,8,0,0,30,0,0,0,0,0,0,0,0,0,0,0,0,0
+tellus,Tellus,earth,rare,Brawler,52,480,28,15,100,0.67,180,100,15,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+krouki,Krouki,earth,rare,Gunner,38,280,10,10,100,0.83,490,160,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+misty,Misty,earth,rare,Gunner,20,280,8,15,100,0.83,395,150,12,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+wolfie,Wolfie,earth,rare,Barbarian,35,600,16,20,100,0.83,220,130,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+hooky,Hooky,earth,epic,Gunner,30,420,20,10,100,0.83,450,125,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+clawdette,Clawdette,earth,epic,Brawler,45,410,18,20,100,1.00,160,145,26,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+thorn,Thorn,earth,epic,Magician,40,400,6,15,100,1.00,500,160,20,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+green_fairy,Green Fairy,earth,epic,Support,20,250,14,20,100,0.50,460,150,29,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+petunia,Petunia,earth,epic,Magician,45,300,16,20,100,0.50,405,180,19,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+lb,Leaf Blade,earth,epic,Knight,50,370,16,15,100,1.00,150,140,11,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+big_eye,Big Eye,light,common,Magician,25,450,8,10,100,1.00,310,180,26,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+healer_bot,Healer Bot,light,common,Support,10,300,2,10,100,1.00,490,140,25,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+swift,Swift,light,common,Ranger,24,250,10,5,100,1.25,380,160,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+spike,Spike,light,common,Barbarian,26,580,30,25,100,0.83,200,140,14,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+lk,Light Knight,light,common,Rogue,25,350,15,20,100,1.00,120,220,12,0,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+bun-gun,Bun-gun,light,rare,Gunner,22,270,10,10,100,0.83,420,150,15,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+gk,Gold Knight,light,rare,Knight,40,480,15,10,100,1.00,150,140,12,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+arcana,Arcana,light,rare,Ranger,30,320,15,20,100,1.00,540,150,12,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+merlinus,Merlinus,light,rare,Support,14,270,12,10,100,0.67,550,100,29,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ser_shu,Ser Shû,light,rare,Lancer,30,430,32,10,100,0.71,340,140,12,0,0,30,0,0,0,0,0,0,0,0,0,0,0,0,0
+joana,Joan Of Arc,light,rare,Lancer,28,500,12,10,100,0.40,220,140,12,0,0,30,0,0,0,0,0,0,0,0,0,0,0,0,0
+ra,Ra,light,rare,Magician,38,190,15,10,100,0.67,350,130,23,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+krunk,Krünk,light,rare,Gunner,28,600,14,10,100,0.83,410,120,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+sieg,Siegfried,light,rare,Barbarian,32,780,14,25,100,0.83,200,125,14,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+oe,One Eye,light,rare,Rogue,32,480,8,10,100,1.00,310,220,14,0,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+thor,Thor,light,rare,Barbarian,48,600,14,25,100,0.50,200,100,16,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+hikari,Hikari,light,epic,Samurai,40,525,6,20,200,1.00,150,170,12,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+tesla,Tesla,light,epic,Magician,36,360,6,20,100,0.83,390,160,19,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+paladin,Paladin,light,epic,Knight,35,550,40,10,100,1.00,150,140,12,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+mr,Monki Roboti,light,epic,Brawler,50,450,20,10,100,0.77,130,150,25,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+angelica,Angelica,light,legendary,Support,14,500,20,0,100,0.33,650,100,35,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+skel_infantry,Skeleton Infantry,dark,common,Rogue,30,300,6,10,100,1.00,160,200,10,0,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+sg,Skeleton Giant,dark,common,Barbarian,45,380,20,15,100,0.50,220,100,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+skel_ranger,Skeleton Ranger,dark,common,Ranger,30,200,6,10,100,1.00,455,160,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+bat,Bat,dark,common,Magician,52,220,8,15,100,1.00,350,250,18,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+dragon_bot,Dragon Bot,dark,common,Gunner,44,280,12,15,100,1.00,430,150,25,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+dark_wolf,Dark Wolf,dark,rare,Magician,45,400,10,10,100,0.56,535,100,22,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+chaos,Chaos,dark,rare,Barbarian,80,440,20,15,100,0.50,220,100,12,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+neko,Neko,dark,rare,Brawler,80,300,20,20,100,1.00,150,180,18,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+mm,Monki Mortar,dark,rare,Gunner,35,230,6,10,100,0.83,405,170,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+sorrow,Sorrow,dark,rare,Gunner,35,350,16,20,100,0.50,620,180,8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+kage,Kage,dark,rare,Samurai,75,260,6,25,200,1.00,150,170,8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+dh,Dark Hunter,dark,rare,Ranger,52,200,6,24,100,1.00,590,160,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+circe,Circe,dark,rare,Magician,50,250,6,10,100,0.50,545,160,30,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+dk,Dark Knight ,dark,rare,Knight,70,320,15,10,100,1.00,150,120,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+vlad,Vlad,dark,epic,Support,42,250,6,10,100,1.00,560,160,30,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+necro,Necromancer,dark,epic,Magician,38,250,15,10,100,0.67,605,130,23,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+kasumi,Kasumi,dark,epic,Rogue,38,240,8,20,100,1.00,120,220,10,0,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+trickster,Trickster,dark,epic,Magician,48,340,10,20,100,1.00,510,200,22,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+onyx,Onyx,dark,epic,Lancer,54,300,12,10,100,0.50,250,150,10,0,0,30,0,0,0,0,0,0,0,0,0,0,0,0,0
+ornok,Ornok,dark,legendary,Knight,64,500,35,10,100,0.83,150,110,20,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
