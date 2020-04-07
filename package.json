@@ -4,6 +4,9 @@
     "jquery": "^3.4.1",
     "papaparse": "^5.2.0",
     "popper.js": "^1.16.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "styled-components": "^5.1.0",
     "tabulator-tables": "^4.6.1"
   },
   "type": "module",
@@ -18,7 +21,7 @@
     "last 2 Firefox versions"
   ],
   "scripts": {
-    "dev": "parcel ./index.html",
+    "dev": "parcel ./index.html -d dev",
     "build": "parcel build ./index.html"
   },
   "devDependencies": {
