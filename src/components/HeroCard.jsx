@@ -1,47 +1,92 @@
 import React, { Component } from "react";
+import styled, { css } from "styled-components";
 
-import BgCommon from "../../assets/cards/common.png";
-import BgRare from "../../assets/cards/rare.png";
-import BgEpic from "../../assets/cards/epic.png";
-import BgLegendary from "../../assets/cards/leg.png";
+export const rarities = ["common", "rare", "epic", "legendary"];
+export const elements = ["water", "fire", "earth", "dark", "light"];
 
-import ElWater from "../../assets/cards/water.png";
-import ElFire from "../../assets/cards/fire.png";
-import ElEarth from "../../assets/cards/earth.png";
-import ElDark from "../../assets/cards/dark.png";
-import ElLight from "../../assets/cards/light.png";
+const CardDiv = styled.div`
+  position: relative;
+  height: ${(props) => (props.size && `${props.size}px`) || "780px"};
+  width: ${(props) => (props.size && `${Math.round((props.size * 570) / 780)}px`) || "570px"};
+  ${(props) =>
+    props.size &&
+    css`
+      ${NameSvg} {
+        height: ${Math.round(0.05 * props.size)}px;
+        font: bold ${Math.round(0.04 * props.size)}px Avenir;
+      }
 
-const bgs = new Map([
-  ["common", BgCommon],
-  ["rare", BgRare],
-  ["epic", BgEpic],
-  ["legendary", BgLegendary],
+      ${NameText} {
+        stroke-width: ${Math.round(0.002 * props.size)}px;
+      }
+    `}
+`;
+
+const borders = new Map([
+  ["fire", "#820000"],
+  ["earth", "#184d00"],
+  ["water", "#0042a8"],
+  ["light", "#ac4a00"],
+  ["dark", "#230041"],
 ]);
 
-const elms = new Map([
-  ["water", ElWater],
-  ["fire", ElFire],
-  ["earth", ElEarth],
-  ["dark", ElDark],
-  ["light", ElLight],
-]);
+const Image = styled.img`
+  position: absolute;
+  z-index: ${(props) => props.z || 0};
+  height: 100%;
+  width: 100%;
+`;
 
-export const rarities = [...bgs.keys()];
-export const elements = [...elms.keys()];
+const Icon = styled.img`
+  position: absolute;
+  z-index: 3;
+  height: 5%;
+  top: 11.5%;
+  right: 16.5%;
+`;
+
+const Avatar = styled.img`
+  position: absolute;
+  z-index: 3;
+  bottom: 5%;
+  left: 50%;
+  transform: translate(-50%);
+  max-height: 90%;
+  max-width: 100%;
+`;
+
+const NameSvg = styled.svg`
+  position: absolute;
+  top: 11%;
+  z-index: 3;
+  width: 100%;
+`;
+
+const NameText = styled.text`
+  fill: white;
+  z-index: 3;
+  stroke: ${(props) => props.color && borders.get(props.color)};
+  stroke-linejoin: round;
+  dominant-baseline: middle;
+  text-anchor: middle;
+`;
 
 export default class HeroCard extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
+    const { hero, size } = this.props;
+
     return (
-      <div>
-        <img src={bgs.get(this.props.rarity)}>
-            
-        </img>
-        <img src={elms.get(this.props.element)}></img>
-      </div>
+      <CardDiv size={size}>
+        <Image src={`cards/${(hero && hero.rarity) || "rare"}.png`} z="0" />
+        <Image src={`cards/${(hero && hero.element) || "dark"}.png`} z="1" />
+        <NameSvg>
+          <NameText y="50%" x="50%" color={(hero && hero.element) || "dark"}>
+            {(hero && hero.name) || "Dark Hunter"}
+          </NameText>
+        </NameSvg>
+        <Icon src={`icons/${(hero && hero.class) || "dark"}.png`} />
+        <Avatar src={`hero_art/${(hero && hero.id) || "dh"}.png`} />
+      </CardDiv>
     );
   }
 }
