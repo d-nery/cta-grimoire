@@ -4,6 +4,7 @@ import { reset } from "styled-modern-css-reset";
 import Papa from "papaparse";
 
 import data from "../data/heroes.csv";
+import c from "../misc/colors";
 
 import HeroCard from "../components/HeroCard";
 import Navbar from "../components/Navbar";
@@ -35,9 +36,10 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const HomeDiv = styled.div`
-  background-color: #452308;
+  background-color: ${c.baseBrown.hex()};
 
   min-height: 100vh;
+  min-width: 1200px;
 `;
 
 const Panel = styled.div`
@@ -47,6 +49,7 @@ const Panel = styled.div`
   flex-direction: row;
   padding: 0 2em;
   align-items: center;
+  justify-content: center;
 `;
 
 export default class Home extends Component {
@@ -65,9 +68,6 @@ export default class Home extends Component {
       heroes: hs,
       hero: hs.find((v) => v.id == "vlad"),
     });
-
-    console.log(this.state.heroes);
-    console.log(this.state.hero);
   }
 
   setHero(hero_id) {
@@ -84,7 +84,7 @@ export default class Home extends Component {
           <Navbar heroOptions={this.state.heroes} onHeroChange={(id) => this.setHero(id)} />
           <Panel>
             <HeroCard hero={this.state.hero} size="700" />
-            <div style={{ width: "30px" }} />
+            <div style={{ width: "15px" }} />
             <Stats hero={this.state.hero} />
           </Panel>
         </HomeDiv>

@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import Select from "react-select";
+import Select, { components } from "react-select";
 
 import Logo from "../../assets/CTA_Logo.png";
 import styled from "styled-components";
+import c from "../misc/colors";
 
 const NavDiv = styled.div`
   height: 75px;
@@ -14,14 +15,13 @@ const NavDiv = styled.div`
   justify-content: space-between;
 `;
 
-const StyledSelect = styled(Select)`
-  /* margin-left: auto; */
-  width: 300px;
-`;
+/****** Logo ******/
 
 const LogoImg = styled.img`
   max-height: 100%;
 `;
+
+/****** Title ******/
 
 const TitleSvg = styled.svg`
   z-index: 3;
@@ -40,6 +40,48 @@ const TitleText = styled.text`
   stroke-width: 2px;
 `;
 
+/****** Seacr hbar ******/
+
+const selectStyle = {
+  option: (styles, state) => ({
+    ...styles,
+    fontFamily: "Avenir",
+  }),
+  control: (styles) => ({
+    ...styles,
+    width: 300,
+    backgroundColor: c.baseBrown.darken(0.2).hex(),
+  }),
+  singleValue: (styles, state) => ({
+    ...styles,
+    position: "unset",
+    transform: "unset",
+    fontFamily: "Avenir",
+    color: "white",
+    marginLeft: ".4em",
+  }),
+};
+
+const SingleValue = ({ ...props }) => {
+  return (
+    <div style={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
+      <img src={`hero_icons/${props.data.value}.png`} alt="" width="40px" />
+      <components.SingleValue {...props} />
+    </div>
+  );
+};
+
+const Option = ({ ...props }) => {
+  return (
+    <div style={{ display: "flex", flexDirection: "row" }}>
+      <img src={`hero_icons/${props.data.value}.png`} alt="" width="40px" />
+      <components.Option {...props} />
+    </div>
+  );
+};
+
+/****** Nav Component ******/
+
 export default class Navbar extends Component {
   render() {
     const options = this.props.heroOptions.map((v) => {
@@ -54,7 +96,13 @@ export default class Navbar extends Component {
             The Grimoire
           </TitleText>
         </TitleSvg>
-        <StyledSelect options={options} onChange={(opt) => this.props.onHeroChange(opt.value)} />
+        <Select
+          styles={selectStyle}
+          components={{ Option, SingleValue }}
+          options={options}
+          placeholder="Select Hero"
+          onChange={(opt) => this.props.onHeroChange(opt.value)}
+        />
       </NavDiv>
     );
   }

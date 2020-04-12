@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import styled, { css } from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 
 export const rarities = ["common", "rare", "epic", "legendary"];
 export const elements = ["water", "fire", "earth", "dark", "light"];
@@ -41,8 +41,14 @@ const Icon = styled.img`
   position: absolute;
   z-index: 3;
   height: 5%;
-  top: 11.5%;
-  right: 16.5%;
+  top: 11.7%;
+  right: 16.2%;
+`;
+
+const AvatarAnim = keyframes`
+  50% {
+    transform: translate(-50%, -0.8%);
+  }
 `;
 
 const Avatar = styled.img`
@@ -53,6 +59,7 @@ const Avatar = styled.img`
   transform: translate(-50%);
   max-height: 90%;
   max-width: 100%;
+  animation: ${AvatarAnim} 5s ease-in-out infinite;
 `;
 
 const NameSvg = styled.svg`

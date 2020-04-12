@@ -3,9 +3,11 @@
   "version": "0.1.0",
   "dependencies": {
     "bootstrap": "^4.4.1",
+    "chroma-js": "^2.1.0",
     "papaparse": "^5.2.0",
     "popper.js": "^1.16.1",
     "react": "^16.13.1",
+    "react-countup": "^4.3.3",
     "react-dom": "^16.13.1",
     "react-select": "^3.1.0",
     "reactstrap": "^8.4.1",
@@ -21,9 +23,10 @@
   ],
   "scripts": {
     "dev": "parcel ./index.html -d dev",
-    "build": "parcel build ./index.html"
+    "build": "parcel build ./index.html -d docs"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
     "parcel": "^1.12.4",
     "parcel-plugin-asset-copier": "^1.0.0",
     "sass": "^1.26.3"
