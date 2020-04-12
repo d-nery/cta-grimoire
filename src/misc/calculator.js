@@ -22,7 +22,7 @@ export const PossibleRunes = [
   { value: "rage", name: "Rage", setBonus: "ctkdmg", base: 0.5, perStar: 0.05 },
   { value: "resist", name: "Resist", setBonus: "resist", base: 0.1, perStar: 0.01 },
   { value: "helpful", name: "Helpful", setBonus: "supshield", base: 0.5, perStar: 0.02 },
-  { value: "vitality", name: "Vitality", setBonus: "hp", base: 0.6, perStar: 0.006 },
+  { value: "vitality", name: "Vitality", setBonus: "hp", base: 0.6, perStar: 0.06 },
   { value: "spoiling", name: "Spoiling", setBonus: "gold", base: 0.5, perStar: 0.05 },
   { value: "frenzy", name: "Frenzy", setBonus: "frenzy", base: 0.05, perStar: 0.005 },
   { value: "frozen", name: "Frozen", setBonus: "freeze", base: 0.2, perStar: 0.02 },
@@ -97,6 +97,7 @@ export const getRunesBonus = (runes) => {
 
       const set = PossibleRunes.find((v) => v.value == type);
       bonuses[set.setBonus] += set.base + set.perStar * stars;
+      //   console.log("Set!", set.setBonus, set.base + set.perStar * stars);
     }
   }
 
@@ -117,6 +118,8 @@ export const getRunesBonus = (runes) => {
     bonuses[rune.primary.value] += parseFloat((base + (level - 1) * perLevel).toFixed(4));
     bonuses["power"] += ((1 + 5 * (1 + stars)) * (1 + (level - 1) / (5 * stars - 1))) / 300;
 
+    // console.log("Primary:", rune.primary.value, parseFloat((base + (level - 1) * perLevel).toFixed(4)));
+
     for (let [i, sec] of rune.secondaries.entries()) {
       if (!sec) {
         continue;
@@ -129,9 +132,16 @@ export const getRunesBonus = (runes) => {
       bonuses[sec.value] += parseFloat(
         ((secBase + (level - 1) * secPerLevel) * slotMultiplier(rune, i + 1)).toFixed(4)
       );
+
+      //   console.log(
+      //     "Sec:",
+      //     sec.value,
+      //     parseFloat(((secBase + (level - 1) * secPerLevel) * slotMultiplier(rune, i + 1)).toFixed(4))
+      //   );
     }
   }
 
+  //   console.log(bonuses);
   return bonuses;
 };
 
