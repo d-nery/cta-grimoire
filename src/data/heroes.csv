@@ -1,4 +1,4 @@
-id,name,element,tribe,sex,flying,rarity,class,atk,hp,def,ctkrate,ctkdmg,aps,atkrange,mvspeed,effresistance,frenzych,dodgerate,stunch,stuntm,atkaoe,ultatk,kshp,bonusgold,freezech,feezeexpldmg,burnch,burntm,burndmg,poisonch,poisontm,poisondmg
+id,name,element,tribe,sex,flying,rarity,class,atk,hp,def,ctkrate,ctkdmg,aps,atkrange,mvspeed,effresistance,frenzych,dodgerate,stunch,stuntm,atkaoe,ultatk,kshp,bonusgold,freezech,freezeexpldmg,burnch,burntm,burndmg,poisonch,poisontm,poisondmg
 blue_fish,Blue Fish,water,Dragon,f,1,common,magician,32,310,8,15,100,1.00,350,250,22,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 bugo_archer,Bugonaut Archer,water,Bugonaut,m,0,common,ranger,28,200,15,10,100,1.00,424,160,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 bugo_fighter,Bugonaut Fighter,water,Bugonaut,m,0,common,rogue,30,240,15,10,100,0.67,120,150,10,0,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0

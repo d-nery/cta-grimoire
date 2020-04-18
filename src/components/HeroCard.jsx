@@ -84,14 +84,14 @@ export default class HeroCard extends Component {
 
     return (
       <CardDiv size={size}>
-        <Image src={`cards/${(hero && hero.rarity) || "rare"}.png`} z="0" />
-        <Image src={`cards/${(hero && hero.element) || "dark"}.png`} z="1" />
+        <Image src={`cards/${(hero && hero.info("rarity")) || "rare"}.png`} z="0" />
+        <Image src={`cards/${(hero && hero.info("element")) || "dark"}.png`} z="1" />
         <NameSvg>
-          <NameText y="50%" x="50%" color={(hero && hero.element) || "dark"}>
-            {(hero && hero.name) || "Dark Hunter"}
+          <NameText y="50%" x="50%" color={(hero && hero.info("element")) || "dark"}>
+            {(hero && hero.info("name")) || "Dark Hunter"}
           </NameText>
         </NameSvg>
-        <Icon src={`icons/${(hero && hero.class) || "dark"}.png`} />
+        <Icon src={`icons/${(hero && hero.info("class")) || "dark"}.png`} />
         <Avatar src={`hero_art/${(hero && hero.id) || "dh"}.png`} />
       </CardDiv>
     );

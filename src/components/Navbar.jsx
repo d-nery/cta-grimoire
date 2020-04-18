@@ -85,7 +85,7 @@ const Option = ({ ...props }) => {
 export default class Navbar extends Component {
   render() {
     const options = this.props.heroOptions.map((v) => {
-      return { value: v.id, label: v.name };
+      return { value: v.id, label: v.info("name") };
     });
 
     return (

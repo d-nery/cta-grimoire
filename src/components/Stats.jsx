@@ -3,7 +3,9 @@ import styled from "styled-components";
 
 import StatNumber from "./StatNumber";
 import StarInput from "./StarInput";
-import { getStats, PossibleRunes, PossiblePrimaries, PossibleSecondaries, getRunesBonus } from "../misc/calculator";
+
+import { Sets, Primaries, Secondaries } from "../data/runes";
+
 import c from "../misc/colors";
 import Select, { components } from "react-select";
 
@@ -128,18 +130,6 @@ const selectStyle = {
   }),
 };
 
-const Option = ({ ...props }) => {
-  props.data.label = <img src={`runes/${props.data.value}.png`} alt="" style={{ width: "35px", height: "35px" }} />;
-
-  return <components.Option {...props} />;
-};
-
-const StatOption = ({ ...props }) => {
-  props.data.label = <img src={`icons/${props.data.value}.png`} alt="" style={{ width: "35px", height: "35px" }} />;
-
-  return <components.Option {...props} />;
-};
-
 const StyledSelect = styled(Select)`
   *::-webkit-scrollbar {
     width: 0;
@@ -155,132 +145,68 @@ const ClearButton = styled.button`
 `;
 
 /* GAMBI for number animations */
-let previous = { atk: 0, hp: 0, power: 0, def: 0, aps: 0, mvspeed: 0, ctkdmg: 0, ctkrate: 0, atkrange: 0 };
+let previous = {
+  atk: 0,
+  hp: 0,
+  power: 0,
+  def: 0,
+  aps: 0,
+  mvspeed: 0,
+  ctkdmg: 0,
+  ctkrate: 0,
+  atkrange: 0,
+};
+
+const setOptions = Object.keys(Sets).map((k) => {
+  return {
+    value: k,
+    label: <img src={`runes/${k}.png`} alt="" style={{ width: "35px", height: "35px" }} />,
+  };
+});
+
+Primaries.forEach((v) => {
+  v.label = <img src={`icons/${v.value}.png`} alt="" style={{ width: "35px", height: "35px" }} />;
+});
+
+Secondaries.forEach((v) => {
+  v.label = <img src={`icons/${v.value}.png`} alt="" style={{ width: "35px", height: "35px" }} />;
+});
 
 export default class Stats extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      yellow: 1,
-      pink: 0,
-      runes: [
-        { type: null, stars: 0, level: 0, primary: null, secondaries: [null, null, null, null] },
-        { type: null, stars: 0, level: 0, primary: null, secondaries: [null, null, null, null] },
-        { type: null, stars: 0, level: 0, primary: null, secondaries: [null, null, null, null] },
-        { type: null, stars: 0, level: 0, primary: null, secondaries: [null, null, null, null] },
-        { type: null, stars: 0, level: 0, primary: null, secondaries: [null, null, null, null] },
-        { type: null, stars: 0, level: 0, primary: null, secondaries: [null, null, null, null] },
-        { type: null, stars: 0, level: 0, primary: null, secondaries: [null, null, null, null] },
-        { type: null, stars: 0, level: 0, primary: null, secondaries: [null, null, null, null] },
-        { type: null, stars: 0, level: 0, primary: null, secondaries: [null, null, null, null] },
-      ],
-    };
-  }
-
-  handleStarChange(event) {
-    const target = event.target;
-    const name = target.name;
-    const value = event.charCode - 48;
-
-    let yellow = this.state.yellow;
-    let pink = this.state.pink;
-
-    if (name == "yellow") {
-      yellow = value < 1 || value > 7 ? yellow : value;
-      pink = Math.min(pink, yellow);
-    } else {
-      pink = value < 0 || value > 7 ? pink : value;
-      yellow = Math.max(pink, yellow);
-    }
-
-    this.setState({
-      yellow: yellow,
-      pink: pink,
-    });
-  }
-
-  handleRuneStarsChange(event) {
-    const target = event.target;
-    let [_, type, slot] = target.name.split("-");
-    const value = event.charCode - 48;
-
-    // Invalid input
-    if (value < 0 || value > 9) {
-      return;
-    }
-
-    slot = parseInt(slot);
-
-    let runestars = this.state.runes[slot].stars;
-    let runelvl = this.state.runes[slot].level;
-
-    if (type == "s") {
-      runestars = value < 1 || value > 6 ? runestars : value;
-      runelvl = Math.max(1, runelvl);
-    } else {
-      if (runelvl <= (runestars * 5) / 10) {
-        runelvl *= 10;
-        runelvl += value;
-      } else {
-        runelvl = value;
-      }
-      runelvl = Math.max(1, runelvl);
-    }
-
-    runelvl = Math.min(runelvl, 5 * runestars);
-
-    let tempRunes = this.state.runes;
-    tempRunes[slot].stars = runestars;
-    tempRunes[slot].level = runelvl;
-
-    this.setState({
-      runes: tempRunes,
-    });
-  }
-
-  handleRuneStatsChange(slot, type, value) {
-    let runes = this.state.runes;
-
-    if (type == "t") {
-      runes[slot].type = value;
-      if (runes[slot].stars == 0) {
-        runes[slot].stars = 1;
-        runes[slot].level = 1;
-      }
-    } else if (type == "p") {
-      runes[slot].primary = value;
-    } else if (type == "c") {
-      runes[slot].type = null;
-      runes[slot].primary = null;
-      runes[slot].secondaries = [null, null, null, null];
-      runes[slot].stars = 0;
-      runes[slot].level = 0;
-    } else {
-      runes[slot].secondaries[type] = value;
-    }
-
-    this.setState({ runes: runes });
-  }
-
   render() {
     const { hero } = this.props;
 
-    const stats = getStats(hero, this.state.yellow, this.state.pink, getRunesBonus(this.state.runes));
-    const { atk, hp, power, def, aps, mvspeed, ctkdmg, ctkrate, atkrange } = stats;
+    const { atk, hp, power, def, aps, mvspeed, ctkdmg, ctkrate, atkrange } = hero.stats;
 
     const ini = previous;
-    previous = stats;
+    previous = hero.stats;
 
     return (
       <MainPanel>
         <LeftPanel>
-          <div style={{ width: "200px", display: "flex", flexDirection: "row", justifyContent: "space-between" }}>
+          <div
+            style={{
+              width: "200px",
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
+            }}
+          >
             <StarInput icon="ystar" title="Stars">
-              <input readOnly name="yellow" value={this.state.yellow} onKeyPress={(e) => this.handleStarChange(e)} />
+              <input
+                readOnly
+                name="yellow"
+                value={hero.yellow}
+                onKeyPress={(e) => this.props.onStarChange("yellow", e.charCode - 48)}
+              />
             </StarInput>
             <StarInput icon="pstar" title="Awakens" pink>
-              <input readOnly name="pink" value={this.state.pink} onKeyPress={(e) => this.handleStarChange(e)} />
+              <input
+                readOnly
+                name="pink"
+                value={hero.pink}
+                onKeyPress={(e) => this.props.onStarChange("pink", e.charCode - 48)}
+              />
             </StarInput>
           </div>
 
@@ -333,59 +259,56 @@ export default class Stats extends Component {
               </thead>
 
               <tbody>
-                {this.state.runes.map((r, i) => {
+                {hero.runes.map((r, i) => {
                   return (
                     <RuneInputs key={i}>
                       <td style={{ padding: "0 .5em" }}>
                         <StyledSelect
-                          options={PossibleRunes}
-                          components={{ Option }}
+                          options={setOptions}
                           styles={selectStyle}
                           placeholder="▼"
-                          onChange={(opt) => this.handleRuneStatsChange(i, "t", opt)}
-                          value={this.state.runes[i].type}
+                          onChange={(opt) => this.props.onRuneChange(i, opt.value)}
+                          value={hero.getRune(i) && hero.getRune(i).option}
                         />
                       </td>
                       <td>
                         <input
                           readOnly
-                          value={r.stars}
+                          value={(r && r.stars) || 0}
                           name={`rune-s-${i}`}
-                          onKeyPress={(e) => this.handleRuneStarsChange(e)}
+                          onKeyPress={(e) => this.props.onRuneStarChange(i, e.charCode - 48)}
                         ></input>
                       </td>
                       <td>
                         <input
                           readOnly
-                          value={r.level}
+                          value={(r && r.level) || 0}
                           name={`rune-l-${i}`}
-                          onKeyPress={(e) => this.handleRuneStarsChange(e)}
+                          onKeyPress={(e) => this.props.onRuneLevelChange(i, e.charCode - 48)}
                         ></input>
                       </td>
                       <td style={{ padding: "0 .5em " }}>
                         <StyledSelect
-                          options={PossiblePrimaries}
-                          components={{ Option: StatOption }}
+                          options={Primaries}
                           styles={selectStyle}
                           placeholder="▼"
-                          onChange={(opt) => this.handleRuneStatsChange(i, "p", opt)}
-                          value={this.state.runes[i].primary}
+                          onChange={(opt) => this.props.onPrimaryChange(i, opt)}
+                          value={hero.getRune(i) && hero.getRune(i).primary}
                         />
                       </td>
                       {[0, 1, 2, 3].map((j) => (
                         <td key={j}>
                           <StyledSelect
-                            options={PossibleSecondaries}
-                            components={{ Option: StatOption }}
+                            options={Secondaries}
                             styles={selectStyle}
                             placeholder="▼"
-                            onChange={(opt) => this.handleRuneStatsChange(i, j, opt)}
-                            value={this.state.runes[i].secondaries[j]}
+                            onChange={(opt) => this.props.onSecondaryChange(i, j, opt)}
+                            value={hero.getRune(i) && hero.getRune(i).getSecondary(j)}
                           />
                         </td>
                       ))}
                       <td>
-                        <ClearButton onClick={() => this.handleRuneStatsChange(i, "c")}>X</ClearButton>
+                        <ClearButton onClick={() => this.props.onRuneClear(i)}>X</ClearButton>
                       </td>
                     </RuneInputs>
                   );
