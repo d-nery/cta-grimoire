@@ -57,7 +57,7 @@ const StatNumber = ({ icon, title, ini, unit, value, bonus, dec = 0 }) => {
         <div>
           <img src={`icons/${icon}.png`} title={title} />
         </div>
-        <CountUp start={s} end={value} duration={0.5} delay={0} decimals={dec}>
+        <CountUp start={s} end={value} duration={0.5} delay={0} decimals={dec} separator=",">
           {({ countUpRef }) => (
             <span>
               <span ref={countUpRef} />
