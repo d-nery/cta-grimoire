@@ -1,13 +1,12 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 
+import * as runes from "./Runes";
+
 import StatNumber from "./StatNumber";
 import StarInput from "./StarInput";
 
 import { Sets, Primaries, Secondaries } from "../data/runes";
-
-import c from "../misc/colors";
-import Select, { components } from "react-select";
 
 const MainPanel = styled.div`
   display: flex;
@@ -21,7 +20,7 @@ const LeftPanel = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
-  width: 200px;
+  width: 300px;
   margin-right: 1em;
 `;
 
@@ -29,119 +28,7 @@ const RightPanel = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
-  width: 500px;
-`;
-
-const RunesPanel = styled.div`
-  background-color: ${c.baseBrown.darken(0.2).hex()};
-  height: 480px;
-  border-radius: 5px;
-  border-color: ${c.baseBrown.darken(0.5).hex()};
-  border-width: 2px;
-  border-style: solid;
-`;
-
-const RunesTitle = styled.div`
-  width: 100%;
-  border-bottom: 1px black solid;
-  text-align: center;
-  font-family: Avenir;
-  color: white;
-  font-size: 25px;
-  background-color: ${c.baseBrown.darken(0.1).hex()};
-`;
-
-const RunesTable = styled.table`
-  margin: auto;
-  margin-top: 1em;
-  th {
-    font-family: Avenir;
-    color: white;
-  }
-`;
-
-const RuneInputs = styled.tr`
-  height: 35px;
-  width: 100%;
-  margin-bottom: 0.3em;
-
-  input {
-    width: 35px;
-    height: 35px;
-    background: ${c.baseBrown.hex()};
-    border: none;
-    color: white;
-    text-align: center;
-    caret-color: transparent;
-    cursor: pointer;
-    font-family: Avenir;
-
-    &:focus {
-      outline-color: yellow;
-    }
-  }
-
-  img {
-    height: 20px;
-    margin: auto;
-  }
-`;
-
-const selectStyle = {
-  dropdownIndicator: () => ({
-    display: "none",
-  }),
-  control: (styles) => ({
-    ...styles,
-    width: 35,
-    height: 35,
-    background: c.baseBrown.hex(),
-    border: "none",
-    margin: "auto",
-    minHeight: "unset",
-  }),
-  valueContainer: (styles) => ({
-    padding: 0,
-  }),
-  singleValue: (styles) => ({
-    ...styles,
-    maxWidth: "unset",
-    margin: 0,
-  }),
-  placeholder: (styles) => ({
-    ...styles,
-    color: "white",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    margin: 0,
-  }),
-  indicatorsContainer: () => ({
-    display: "none",
-  }),
-  menuList: (styles) => ({
-    ...styles,
-    scrollbarWidth: "none",
-    padding: "0.1em",
-  }),
-  option: (styles) => ({
-    ...styles,
-    padding: 0,
-    marginBottom: "0.1em",
-  }),
-};
-
-const StyledSelect = styled(Select)`
-  *::-webkit-scrollbar {
-    width: 0;
-    height: 0;
-  }
-`;
-
-const ClearButton = styled.button`
-  background-color: transparent;
-  border: none;
-  font-family: Avenir;
-  color: red;
+  width: 450px;
 `;
 
 /* GAMBI for number animations */
@@ -157,19 +44,40 @@ let previous = {
   atkrange: 0,
 };
 
-const setOptions = Object.keys(Sets).map((k) => {
+const setOptions = Object.entries(Sets).map(([k, v]) => {
   return {
     value: k,
-    label: <img src={`runes/${k}.png`} alt="" style={{ width: "35px", height: "35px" }} />,
+    label: (
+      <img
+        src={`runes/${k}.png`}
+        alt={v.name}
+        title={v.name}
+        style={{ width: "35px", height: "35px" }}
+      />
+    ),
   };
 });
 
 Primaries.forEach((v) => {
-  v.label = <img src={`icons/${v.value}.png`} alt="" style={{ width: "35px", height: "35px" }} />;
+  v.label = (
+    <img
+      src={`icons/${v.value}.png`}
+      alt={v.name}
+      title={v.name}
+      style={{ width: "35px", height: "35px" }}
+    />
+  );
 });
 
 Secondaries.forEach((v) => {
-  v.label = <img src={`icons/${v.value}.png`} alt="" style={{ width: "35px", height: "35px" }} />;
+  v.label = (
+    <img
+      src={`icons/${v.value}.png`}
+      alt={v.name}
+      title={v.name}
+      style={{ width: "35px", height: "35px" }}
+    />
+  );
 });
 
 export default class Stats extends Component {
@@ -178,8 +86,8 @@ export default class Stats extends Component {
 
     const { atk, hp, power, def, aps, mvspeed, ctkdmg, ctkrate, atkrange } = hero.stats;
 
-    const ini = previous;
-    previous = hero.stats;
+    const ini = { ...previous };
+    previous = { ...hero.stats };
 
     return (
       <MainPanel>
@@ -210,43 +118,70 @@ export default class Stats extends Component {
             </StarInput>
           </div>
 
-          <StatNumber ini={ini.atk} icon="atk" title="Damage">
-            {atk}
-          </StatNumber>
-          <StatNumber ini={ini.hp} icon="hp" title="Health">
-            {hp}
-          </StatNumber>
-          <StatNumber ini={ini.def} icon="def" title="Defense">
-            {def}
-          </StatNumber>
-          <StatNumber ini={ini.aps} icon="aps" title="Attack Speed" dec={2}>
-            {aps}
-          </StatNumber>
-          <StatNumber ini={ini.atkrange} icon="atkrange" title="Attack Range">
-            {atkrange}
-          </StatNumber>
-          <StatNumber ini={ini.mvspeed} icon="mvspeed" title="Move Speed">
-            {mvspeed}
-          </StatNumber>
-          <StatNumber ini={ini.ctkrate} icon="ctkrate" title="Critical Rate" unit="%">
-            {ctkrate}
-          </StatNumber>
-          <StatNumber ini={ini.ctkdmg} icon="ctkdmg" title="Critical Damage" unit="%">
-            {ctkdmg}
-          </StatNumber>
+          <StatNumber
+            ini={ini.atk}
+            value={atk}
+            bonus={hero.bonuses.atk}
+            icon="atk"
+            title="Damage"
+          />
+          <StatNumber ini={ini.hp} value={hp} bonus={hero.bonuses.hp} icon="hp" title="Health" />
+          <StatNumber
+            ini={ini.def}
+            value={def}
+            bonus={hero.bonuses.def}
+            icon="def"
+            title="Defense"
+          />
+          <StatNumber
+            ini={ini.aps}
+            value={aps}
+            bonus={hero.bonuses.aps}
+            icon="aps"
+            title="Attack Speed"
+            dec={2}
+          />
+          <StatNumber
+            ini={ini.atkrange}
+            value={atkrange}
+            bonus={hero.bonuses.atkrange}
+            icon="atkrange"
+            title="Attack Range"
+          />
+          <StatNumber
+            ini={ini.mvspeed}
+            value={mvspeed}
+            bonus={hero.bonuses.mvspeed}
+            icon="mvspeed"
+            title="Move Speed"
+          />
+          <StatNumber
+            ini={ini.ctkrate}
+            value={ctkrate}
+            bonus={hero.bonuses.ctkrate}
+            icon="ctkrate"
+            title="Critical Rate"
+            unit="%"
+          />
+          <StatNumber
+            ini={ini.ctkdmg}
+            value={ctkdmg}
+            bonus={hero.bonuses.ctkdmg}
+            icon="ctkdmg"
+            title="Critical Damage"
+            unit="%"
+          />
 
           <div style={{ marginTop: "auto" }}>
-            <StatNumber ini={ini.power} icon="power" title="Power">
-              {power}
-            </StatNumber>
+            <StatNumber ini={ini.power} value={power} icon="power" title="Power" />
           </div>
         </LeftPanel>
         <RightPanel>
-          <RunesPanel>
-            <RunesTitle>Runes</RunesTitle>
-            <RunesTable>
+          <runes.Panel>
+            <runes.Title>Runes</runes.Title>
+            <runes.Table>
               <thead>
-                <RuneInputs>
+                <runes.Inputs>
                   <th>T</th>
                   <th>
                     <img src={`icons/ystar.png`} title="stars" />
@@ -255,17 +190,17 @@ export default class Stats extends Component {
                   <th>P</th>
                   <th colSpan="4">Secondaries</th>
                   <th></th>
-                </RuneInputs>
+                </runes.Inputs>
               </thead>
 
               <tbody>
                 {hero.runes.map((r, i) => {
                   return (
-                    <RuneInputs key={i}>
+                    <runes.Inputs key={i}>
                       <td style={{ padding: "0 .5em" }}>
-                        <StyledSelect
+                        <runes.StyledSelect
                           options={setOptions}
-                          styles={selectStyle}
+                          styles={runes.SelectStyle}
                           placeholder="▼"
                           onChange={(opt) => this.props.onRuneChange(i, opt.value)}
                           value={hero.getRune(i) && hero.getRune(i).option}
@@ -288,9 +223,9 @@ export default class Stats extends Component {
                         ></input>
                       </td>
                       <td style={{ padding: "0 .5em " }}>
-                        <StyledSelect
+                        <runes.StyledSelect
                           options={Primaries}
-                          styles={selectStyle}
+                          styles={runes.SelectStyle}
                           placeholder="▼"
                           onChange={(opt) => this.props.onPrimaryChange(i, opt)}
                           value={hero.getRune(i) && hero.getRune(i).primary}
@@ -298,9 +233,9 @@ export default class Stats extends Component {
                       </td>
                       {[0, 1, 2, 3].map((j) => (
                         <td key={j}>
-                          <StyledSelect
+                          <runes.StyledSelect
                             options={Secondaries}
-                            styles={selectStyle}
+                            styles={runes.SelectStyle}
                             placeholder="▼"
                             onChange={(opt) => this.props.onSecondaryChange(i, j, opt)}
                             value={hero.getRune(i) && hero.getRune(i).getSecondary(j)}
@@ -308,14 +243,22 @@ export default class Stats extends Component {
                         </td>
                       ))}
                       <td>
-                        <ClearButton onClick={() => this.props.onRuneClear(i)}>X</ClearButton>
+                        <runes.ClearButton onClick={() => this.props.onRuneClear(i)}>
+                          X
+                        </runes.ClearButton>
                       </td>
-                    </RuneInputs>
+                    </runes.Inputs>
                   );
                 })}
               </tbody>
-            </RunesTable>
-          </RunesPanel>
+            </runes.Table>
+            <runes.WeaponDiv>
+              <img
+                src={`hero_weapons/${hero.id}-${Math.max(Math.ceil(hero.weaponLevel / 3), 1)}.png`}
+                alt=""
+              />
+            </runes.WeaponDiv>
+          </runes.Panel>
         </RightPanel>
       </MainPanel>
     );

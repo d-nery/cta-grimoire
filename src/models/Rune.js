@@ -93,7 +93,7 @@ export default class Rune {
         ((secBase + (this._level - 1) * secPerLevel) * this._slotMultiplier(i + 1)).toFixed(6)
       );
 
-      bonuses[sec.value] = (bonuses[sec.value] && bonuses[sec.value] + secV) || secV;
+      bonuses[sec.value] = secV;
     }
 
     return bonuses;

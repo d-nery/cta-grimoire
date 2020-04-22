@@ -4,12 +4,20 @@ import CountUp from "react-countup";
 
 import c from "../misc/colors";
 
-const StatRow = styled.div`
+const StatWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 0.4em;
+  width: 300px;
+  align-items: center;
+`;
+
+const StatData = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 0.4em;
+
   background-color: ${c.baseBrown.darken(0.2).hex()};
 
   border-radius: 5px;
@@ -34,24 +42,33 @@ const StatRow = styled.div`
   }
 `;
 
-const StatNumber = ({ icon, title, ini, unit, children, dec = 0 }) => {
+const StatBonus = styled.div`
+  margin-left: auto;
+  color: white;
+  font-family: Avenir;
+`;
+
+const StatNumber = ({ icon, title, ini, unit, value, bonus, dec = 0 }) => {
   const s = ini || 0;
 
   return (
-    <StatRow row>
-      <div>
-        <img src={`icons/${icon}.png`} title={title} />
-      </div>
-      <CountUp start={s} end={children} duration={0.5} delay={0} decimals={dec}>
-        {({ countUpRef }) => (
-          <span>
-            <span ref={countUpRef} />
-            &nbsp;
-            {unit ? unit : ""}
-          </span>
-        )}
-      </CountUp>
-    </StatRow>
+    <StatWrapper>
+      <StatData>
+        <div>
+          <img src={`icons/${icon}.png`} title={title} />
+        </div>
+        <CountUp start={s} end={value} duration={0.5} delay={0} decimals={dec}>
+          {({ countUpRef }) => (
+            <span>
+              <span ref={countUpRef} />
+              &nbsp;
+              {unit ? unit : ""}
+            </span>
+          )}
+        </CountUp>
+      </StatData>
+      <StatBonus>{bonus ? `+${(bonus * 100).toFixed(2)}%` : ""}</StatBonus>
+    </StatWrapper>
   );
 };
 

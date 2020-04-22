@@ -77,6 +77,7 @@ export default class Home extends Component {
 
   clearRune(i) {
     this.state.hero.deleteRune(i);
+
     this.setState({
       hero: this.state.hero,
     });
@@ -88,6 +89,7 @@ export default class Home extends Component {
     }
 
     this.state.hero.getRune(index).primary = primary;
+    this.state.hero._updateBonuses();
 
     this.setState({
       hero: this.state.hero,
@@ -100,6 +102,7 @@ export default class Home extends Component {
     }
 
     this.state.hero.getRune(indexRune).setSecondary(indexSecondary, secondary);
+    this.state.hero._updateBonuses();
 
     this.setState({
       hero: this.state.hero,
@@ -108,6 +111,8 @@ export default class Home extends Component {
 
   setRuneStars(i, s) {
     this.state.hero.getRune(i).stars = s;
+    this.state.hero._updateBonuses();
+
     this.setState({
       hero: this.state.hero,
     });
@@ -125,6 +130,8 @@ export default class Home extends Component {
     }
 
     this.state.hero.getRune(i).level = runelvl;
+    this.state.hero._updateBonuses();
+
     this.setState({
       hero: this.state.hero,
     });
