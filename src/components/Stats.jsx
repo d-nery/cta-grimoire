@@ -109,15 +109,19 @@ export default (props) => {
           <StarInput icon="ystar" title="Stars">
             <input
               name="yellow"
+              type="tel"
               value={hero.yellow}
-              onKeyPress={(e) => props.onStarChange("yellow", e.charCode - 48)}
+              onKeyDown={(e) => {
+                props.onStarChange("yellow", +e.key);
+              }}
             />
           </StarInput>
           <StarInput icon="pstar" title="Awakens" pink>
             <input
               name="pink"
+              type="tel"
               value={hero.pink}
-              onKeyPress={(e) => props.onStarChange("pink", e.charCode - 48)}
+              onKeyDown={(e) => props.onStarChange("pink", +e.key)}
             />
           </StarInput>
         </div>
@@ -201,15 +205,17 @@ export default (props) => {
                     <td>
                       <input
                         value={(r && r.stars) || 0}
+                        type="tel"
                         name={`rune-s-${i}`}
-                        onKeyPress={(e) => props.onRuneStarChange(i, e.charCode - 48)}
+                        onKeyUp={(e) => props.onRuneStarChange(i, +e.key)}
                       ></input>
                     </td>
                     <td>
                       <input
                         value={(r && r.level) || 0}
+                        type="tel"
                         name={`rune-l-${i}`}
-                        onKeyPress={(e) => props.onRuneLevelChange(i, e.charCode - 48)}
+                        onKeyUp={(e) => props.onRuneLevelChange(i, +e.key)}
                       ></input>
                     </td>
                     <td style={{ padding: "0 .5em " }}>

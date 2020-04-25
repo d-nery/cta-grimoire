@@ -17,8 +17,7 @@
   "license": "MIT",
   "private": true,
   "browserslist": [
-    "last 2 Chrome versions",
-    "last 2 Firefox versions"
+    "defaults"
   ],
   "scripts": {
     "dev": "parcel ./index.html -d dev",

@@ -66,6 +66,10 @@ export default class Home extends Component {
   }
 
   setStars(n, v) {
+    if (isNaN(v)) {
+      return;
+    }
+
     this.state.hero[n] = v;
     this.setState({
       hero: this.state.hero,
@@ -115,6 +119,10 @@ export default class Home extends Component {
   }
 
   setRuneStars(i, s) {
+    if (isNaN(s)) {
+      return;
+    }
+
     this.state.hero.getRune(i).stars = s;
     this.state.hero._updateBonuses();
 
@@ -124,6 +132,10 @@ export default class Home extends Component {
   }
 
   setRuneLevel(i, l) {
+    if (isNaN(l)) {
+      return;
+    }
+
     let runelvl = this.state.hero.getRune(i).level;
     let runestars = this.state.hero.getRune(i).stars;
 

@@ -54,16 +54,14 @@ const StatBonus = styled.div`
   font-family: Avenir;
 `;
 
-const StatNumber = ({ icon, title, ini, unit, value, bonus, dec = 0 }) => {
-  const s = ini || 0;
-
+const StatNumber = ({ icon, title, ini = 0, unit, value, bonus, dec = 0 }) => {
   return (
     <StatWrapper>
       <StatData>
         <div>
           <img src={`icons/${icon}.png`} title={title} />
         </div>
-        <CountUp start={s} end={value} duration={0.5} delay={0} decimals={dec} separator=",">
+        <CountUp start={ini} end={value} duration={0.5} delay={0} decimals={dec} separator=",">
           {({ countUpRef }) => (
             <span>
               <span ref={countUpRef} />
