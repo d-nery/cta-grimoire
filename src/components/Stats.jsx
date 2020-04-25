@@ -200,6 +200,7 @@ export default (props) => {
                         placeholder="▼"
                         onChange={(opt) => props.onRuneChange(i, opt.value)}
                         value={hero.getRune(i) && hero.getRune(i).option}
+                        isSearchable={false}
                       />
                     </td>
                     <td>
@@ -225,6 +226,7 @@ export default (props) => {
                         placeholder="▼"
                         onChange={(opt) => props.onPrimaryChange(i, opt)}
                         value={hero.getRune(i) && hero.getRune(i).primary}
+                        isSearchable={false}
                       />
                     </td>
                     {[0, 1, 2, 3].map((j) => (
@@ -235,6 +237,7 @@ export default (props) => {
                           placeholder="▼"
                           onChange={(opt) => props.onSecondaryChange(i, j, opt)}
                           value={hero.getRune(i) && hero.getRune(i).getSecondary(j)}
+                          isSearchable={false}
                         />
                       </td>
                     ))}
