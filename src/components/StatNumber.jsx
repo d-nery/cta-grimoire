@@ -10,6 +10,12 @@ const StatWrapper = styled.div`
   margin-bottom: 0.4em;
   width: 300px;
   align-items: center;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    width: 200px;
+    height: 75px;
+  }
 `;
 
 const StatData = styled.div`

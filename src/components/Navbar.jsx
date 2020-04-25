@@ -6,26 +6,30 @@ import styled from "styled-components";
 import c from "../misc/colors";
 
 const NavDiv = styled.div`
-  height: 75px;
   width: 100%;
   display: flex;
   flex-direction: row;
   padding: 0 2em;
   align-items: center;
   justify-content: space-between;
+
+  @media (max-width: 768px) {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 `;
 
 /****** Logo ******/
 
 const LogoImg = styled.img`
-  max-height: 100%;
+  max-height: 75px;
 `;
 
 /****** Title ******/
 
 const TitleSvg = styled.svg`
   z-index: 3;
-  width: 40%;
+  width: 350px;
   height: 75px;
   font: bold 50px Avenir;
 `;
@@ -51,6 +55,10 @@ const selectStyle = {
     ...styles,
     width: 300,
     backgroundColor: c.baseBrown.darken(0.2).hex(),
+  }),
+  container: (styles) => ({
+    ...styles,
+    marginTop: "1em",
   }),
   singleValue: (styles, state) => ({
     ...styles,
@@ -82,28 +90,26 @@ const Option = ({ ...props }) => {
 
 /****** Nav Component ******/
 
-export default class Navbar extends Component {
-  render() {
-    const options = this.props.heroOptions.map((v) => {
-      return { value: v.id, label: v.info("name") };
-    });
+export default (props) => {
+  const options = props.heroOptions.map((v) => {
+    return { value: v.id, label: v.info("name") };
+  });
 
-    return (
-      <NavDiv>
-        <LogoImg src={Logo} />
-        <TitleSvg>
-          <TitleText x="50%" y="50%">
-            The Grimoire
-          </TitleText>
-        </TitleSvg>
-        <Select
-          styles={selectStyle}
-          components={{ Option, SingleValue }}
-          options={options}
-          placeholder="Select Hero"
-          onChange={(opt) => this.props.onHeroChange(opt.value)}
-        />
-      </NavDiv>
-    );
-  }
-}
+  return (
+    <NavDiv>
+      <LogoImg src={Logo} />
+      <TitleSvg>
+        <TitleText x="50%" y="50%">
+          The Grimoire
+        </TitleText>
+      </TitleSvg>
+      <Select
+        styles={selectStyle}
+        components={{ Option, SingleValue }}
+        options={options}
+        placeholder="Select Hero"
+        onChange={(opt) => props.onHeroChange(opt.value)}
+      />
+    </NavDiv>
+  );
+};

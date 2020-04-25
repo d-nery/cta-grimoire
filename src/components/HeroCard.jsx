@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState, useEffect, useLayoutEffect } from "react";
 import styled, { css, keyframes } from "styled-components";
 
 export const rarities = ["common", "rare", "epic", "legendary"];
@@ -6,18 +6,29 @@ export const elements = ["water", "fire", "earth", "dark", "light"];
 
 const CardDiv = styled.div`
   position: relative;
-  height: ${(props) => (props.size && `${props.size}px`) || "780px"};
-  width: ${(props) => (props.size && `${Math.round((props.size * 570) / 780)}px`) || "570px"};
+  width: 100%;
+  max-width: 570px;
+  min-height: 600px;
+`;
+
+const Wrapper = styled.div`
+  position: absolute;
+  transform: translateY(-50%);
+  top: 50%;
+  left: 0;
+  right: 0;
+  max-width: 100%;
+  height: ${(props) => props.height + "px"};
+  width: ${(props) => props.width + "px"};
   ${(props) =>
-    props.size &&
     css`
       ${NameSvg} {
-        height: ${Math.round(0.05 * props.size)}px;
-        font: bold ${Math.round(0.04 * props.size)}px Avenir;
+        height: ${Math.round(0.05 * props.height)}px;
+        font: bold ${Math.round(0.04 * props.height)}px Avenir;
       }
 
       ${NameText} {
-        stroke-width: ${Math.round(0.002 * props.size)}px;
+        stroke-width: ${Math.round(0.002 * props.height)}px;
       }
     `}
 `;
@@ -33,8 +44,7 @@ const borders = new Map([
 const Image = styled.img`
   position: absolute;
   z-index: ${(props) => props.z || 0};
-  height: 100%;
-  width: 100%;
+  max-width: 100%;
 `;
 
 const Icon = styled.img`
@@ -47,16 +57,17 @@ const Icon = styled.img`
 
 const AvatarAnim = keyframes`
   50% {
-    transform: translate(-50%, -0.8%);
+    transform: translateY(-46%);
   }
 `;
 
 const Avatar = styled.img`
   position: absolute;
   z-index: 3;
-  bottom: 5%;
-  left: 50%;
-  transform: translate(-50%);
+  top: 50%;
+  transform: translateY(-45%);
+  left: 0;
+  right: 0;
   max-height: 90%;
   max-width: 100%;
   animation: ${AvatarAnim} 5s ease-in-out infinite;
@@ -78,12 +89,30 @@ const NameText = styled.text`
   text-anchor: middle;
 `;
 
-export default class HeroCard extends Component {
-  render() {
-    const { hero, size } = this.props;
+export default ({ hero }) => {
+  const [width, setWidth] = useState(570);
 
-    return (
-      <CardDiv size={size}>
+  const onResize = () => {
+    const actualWidth = document.getElementById("carddiv").clientWidth;
+    setWidth(actualWidth);
+  };
+
+  useLayoutEffect(() => {
+    onResize();
+    window.addEventListener("resize", onResize);
+
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+
+  const baseHeight = 780;
+  const baseWidth = 570;
+
+  let w = Math.min(width, baseWidth);
+  let h = Math.round((baseHeight * w) / baseWidth);
+
+  return (
+    <CardDiv id="carddiv">
+      <Wrapper height={h} width={w}>
         <Image src={`cards/${(hero && hero.info("rarity")) || "rare"}.png`} z="0" />
         <Image src={`cards/${(hero && hero.info("element")) || "dark"}.png`} z="1" />
         <NameSvg>
@@ -93,7 +122,7 @@ export default class HeroCard extends Component {
         </NameSvg>
         <Icon src={`icons/${(hero && hero.info("class")) || "dark"}.png`} />
         <Avatar src={`hero_art/${(hero && hero.id) || "dh"}.png`} />
-      </CardDiv>
-    );
-  }
-}
+      </Wrapper>
+    </CardDiv>
+  );
+};

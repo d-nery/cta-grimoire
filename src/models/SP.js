@@ -4,6 +4,6 @@ export default class SP {
     this.description = data.description;
     this.aoe = data.aoe;
     this.effect = data.effect;
-    this.duration = data.duration;
+    // this.duration = data.duration;
   }
 }

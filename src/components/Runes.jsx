@@ -26,7 +26,8 @@ export const Title = styled.div`
 `;
 
 export const Table = styled.table`
-  margin-top: 1em;
+  margin: 1em 2em;
+  
   th {
     font-family: Avenir;
     color: white;
@@ -50,7 +51,9 @@ export const Inputs = styled.tr`
     font-family: Avenir;
 
     &:focus {
-      outline-color: yellow;
+      outline-color: white;
+      outline-style: solid;
+      outline-width: 1px;
     }
   }
 

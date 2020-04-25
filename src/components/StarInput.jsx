@@ -43,6 +43,8 @@ const StatRow = styled.div`
 
     &:focus {
       outline-color: ${(props) => (props.pink ? "pink" : "yellow")};
+      outline-style: solid;
+      outline-width: 1px;
     }
   }
 `;

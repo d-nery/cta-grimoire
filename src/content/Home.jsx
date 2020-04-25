@@ -25,17 +25,22 @@ const HomeDiv = styled.div`
   background-color: ${c.baseBrown.hex()};
 
   min-height: 100vh;
-  min-width: 1200px;
+  min-width: 100vw;
+  /* min-width: 1200px; */
 `;
 
 const Panel = styled.div`
   width: 100%;
-  height: 700px;
+  min-height: 700px;
   display: flex;
   flex-direction: row;
-  padding: 0 2em;
-  align-items: center;
+  padding: 0 0.5em 0.5em 0.5em;
+  align-items: stretch;
   justify-content: center;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 export default class Home extends Component {
