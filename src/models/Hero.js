@@ -154,7 +154,7 @@ export default class Hero {
   }
 }
 
-export const unserializeHero = (data) => {
+export const deserializeHero = (data) => {
   let instance = new Hero();
   let serializedObject = JSON.parse(data);
   Object.assign(instance, serializedObject);

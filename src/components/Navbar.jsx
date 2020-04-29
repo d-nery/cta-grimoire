@@ -73,7 +73,7 @@ const selectStyle = {
 const SingleValue = ({ ...props }) => {
   return (
     <div style={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
-      <img src={`hero_icons/${props.data.value}.png`} alt="" width="40px" />
+      <img src={`hero_icons/${props.data.icon}.png`} alt="" width="40px" />
       <components.SingleValue {...props} />
     </div>
   );
@@ -82,7 +82,7 @@ const SingleValue = ({ ...props }) => {
 const Option = ({ ...props }) => {
   return (
     <div style={{ display: "flex", flexDirection: "row" }}>
-      <img src={`hero_icons/${props.data.value}.png`} alt="" width="40px" />
+      <img src={`hero_icons/${props.data.icon}.png`} alt="" width="40px" />
       <components.Option {...props} />
     </div>
   );
@@ -91,8 +91,8 @@ const Option = ({ ...props }) => {
 /****** Nav Component ******/
 
 export default (props) => {
-  const options = props.heroOptions.map((v) => {
-    return { value: v.id, label: v.info("name") };
+  const options = props.heroOptions.map((v, i) => {
+    return { value: i, icon: v.id, label: v.info("name") };
   });
 
   return (

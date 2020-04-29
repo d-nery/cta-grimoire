@@ -7,7 +7,7 @@ export default class Rune {
     this.set = set;
     this._stars = 1;
     this._level = 1;
-    this._primary = Primaries[0];
+    this._primary = "atk";
     this._secondaries = [null, null, null, null];
   }
 
@@ -48,7 +48,16 @@ export default class Rune {
   }
 
   get primary() {
-    return this._primary;
+    return Primaries[this._primary];
+  }
+
+  get primaryOption() {
+    return {
+      value: this._primary,
+      label: (
+        <img src={`icons/${this._primary}.png`} alt="" style={{ width: "35px", height: "35px" }} />
+      ),
+    };
   }
 
   get maxLevel() {
@@ -61,7 +70,24 @@ export default class Rune {
   }
 
   getSecondary(i) {
-    return this._secondaries[i];
+    return Secondaries[this._secondaries[i]];
+  }
+
+  getSecondaryOption(i) {
+    if (!this._secondaries[i]) {
+      return null;
+    }
+
+    return {
+      value: this._secondaries[i],
+      label: (
+        <img
+          src={`icons/${this._secondaries[i]}.png`}
+          alt=""
+          style={{ width: "35px", height: "35px" }}
+        />
+      ),
+    };
   }
 
   get option() {
@@ -72,12 +98,14 @@ export default class Rune {
   }
 
   get bonuses() {
-    const base = this._primary.base * this._stars;
+    const primary = Primaries[this._primary];
+
+    const base = primary.base * this._stars;
     const perLevel = base / (this.maxLevel - 1);
     const bonuses = {};
 
     const primV = parseFloat((base + (this._level - 1) * perLevel).toFixed(6));
-    bonuses[this._primary.value] = primV;
+    bonuses[this._primary] = primV;
     bonuses["power"] =
       ((1 + 5 * (1 + this._stars)) * (1 + (this._level - 1) / (this.maxLevel - 1))) / 300;
 
@@ -86,14 +114,14 @@ export default class Rune {
         continue;
       }
 
-      const secBase = sec.base[this._stars - 1];
+      const secBase = Secondaries[sec].base[this._stars - 1];
       const secPerLevel = secBase / (this.maxLevel - 1);
 
       const secV = parseFloat(
         ((secBase + (this._level - 1) * secPerLevel) * this._slotMultiplier(i + 1)).toFixed(6)
       );
 
-      bonuses[sec.value] = secV;
+      bonuses[sec] = secV;
     }
 
     return bonuses;

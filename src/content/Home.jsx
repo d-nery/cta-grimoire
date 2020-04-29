@@ -9,6 +9,32 @@ import HeroCard from "../components/HeroCard";
 import Navbar from "../components/Navbar";
 import Stats from "../components/Stats";
 import Hero from "../models/Hero";
+import Rune from "../models/Rune";
+
+import low from "lowdb";
+import LocalStorage from "lowdb/adapters/LocalStorage";
+
+const db = low(
+  new LocalStorage("cta-grimoire-db-1", {
+    deserialize: (data) => {
+      let db = JSON.parse(data);
+
+      db.heroes.forEach((v, i) => {
+        db.heroes[i] = Object.assign(new Hero(), v);
+
+        db.heroes[i]._runes.forEach((r, j) => {
+          if (!r) {
+            return;
+          }
+
+          db.heroes[i]._runes[j] = Object.assign(new Rune(), r);
+        });
+      });
+
+      return db;
+    },
+  })
+);
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
@@ -53,15 +79,19 @@ export default class Home extends Component {
       heroes.push(new Hero(k));
     }
 
+    db.defaults({ heroes: heroes, hero: 93 }).write();
+
     this.state = {
-      heroes: heroes,
-      hero: heroes.find((v) => v.id == "vlad"),
+      heroes: db.get("heroes").value(),
+      hero: db.get("hero").value(),
     };
   }
 
-  setHero(hero_id) {
+  setHero(hero_idx) {
+    db.set("hero", hero_idx).write();
+
     this.setState({
-      hero: this.state.heroes.find((v) => v.id == hero_id),
+      hero: hero_idx,
     });
   }
 
@@ -70,22 +100,32 @@ export default class Home extends Component {
       return;
     }
 
-    this.state.hero[n] = v;
+    const idx = this.state.hero;
+    this.state.heroes[idx][n] = v;
+
+    db.set("heroes", this.state.heroes).write();
+
     this.setState({
-      hero: this.state.hero,
+      heroes: this.state.heroes,
     });
   }
 
   setRune(i, set) {
-    this.state.hero.setRune(i, set);
+    const idx = this.state.hero;
+    this.state.heroes[idx].setRune(i, set);
+
+    db.set("heroes", this.state.heroes).write();
 
     this.setState({
-      hero: this.state.hero,
+      heroes: this.state.heroes,
     });
   }
 
   clearRune(i) {
-    this.state.hero.deleteRune(i);
+    const idx = this.state.hero;
+    this.state.heroes[idx].deleteRune(i);
+
+    db.set("heroes", this.state.heroes).write();
 
     this.setState({
       hero: this.state.hero,
@@ -93,51 +133,64 @@ export default class Home extends Component {
   }
 
   setPrimary(index, primary) {
-    if (!this.state.hero.getRune(index)) {
+    const idx = this.state.hero;
+
+    if (!this.state.heroes[idx].getRune(index)) {
       return;
     }
 
-    this.state.hero.getRune(index).primary = primary;
-    this.state.hero._updateBonuses();
+    this.state.heroes[idx].getRune(index).primary = primary.value;
+    this.state.heroes[idx]._updateBonuses();
+
+    db.set("heroes", this.state.heroes).write();
 
     this.setState({
-      hero: this.state.hero,
+      heroes: this.state.heroes,
     });
   }
 
   setSecondary(indexRune, indexSecondary, secondary) {
-    if (!this.state.hero.getRune(indexRune)) {
+    const idx = this.state.hero;
+    if (!this.state.heroes[idx].getRune(indexRune)) {
       return;
     }
 
-    this.state.hero.getRune(indexRune).setSecondary(indexSecondary, secondary);
-    this.state.hero._updateBonuses();
+    this.state.heroes[idx].getRune(indexRune).setSecondary(indexSecondary, secondary.value);
+    this.state.heroes[idx]._updateBonuses();
+
+    db.set("heroes", this.state.heroes).write();
 
     this.setState({
-      hero: this.state.hero,
+      heroes: this.state.heroes,
     });
   }
 
   setRuneStars(i, s) {
+    const idx = this.state.hero;
+
     if (isNaN(s)) {
       return;
     }
 
-    this.state.hero.getRune(i).stars = s;
-    this.state.hero._updateBonuses();
+    this.state.heroes[idx].getRune(i).stars = s;
+    this.state.heroes[idx]._updateBonuses();
+
+    db.set("heroes", this.state.heroes).write();
 
     this.setState({
-      hero: this.state.hero,
+      heroes: this.state.heroes,
     });
   }
 
   setRuneLevel(i, l) {
+    const idx = this.state.hero;
+
     if (isNaN(l)) {
       return;
     }
 
-    let runelvl = this.state.hero.getRune(i).level;
-    let runestars = this.state.hero.getRune(i).stars;
+    let runelvl = this.state.heroes[idx].getRune(i).level;
+    let runestars = this.state.heroes[idx].getRune(i).stars;
 
     if (runelvl <= (runestars * 5) / 10) {
       runelvl *= 10;
@@ -146,25 +199,29 @@ export default class Home extends Component {
       runelvl = l;
     }
 
-    this.state.hero.getRune(i).level = runelvl;
-    this.state.hero._updateBonuses();
+    this.state.heroes[idx].getRune(i).level = runelvl;
+    this.state.heroes[idx]._updateBonuses();
+
+    db.set("heroes", this.state.heroes).write();
 
     this.setState({
-      hero: this.state.hero,
+      heroes: this.state.heroes,
     });
   }
 
   render() {
+    const idx = this.state.hero;
+
     return (
       <>
         <GlobalStyle />
         <HomeDiv>
           <Navbar heroOptions={this.state.heroes} onHeroChange={(id) => this.setHero(id)} />
           <Panel>
-            <HeroCard hero={this.state.hero} size="700" />
+            <HeroCard hero={this.state.heroes[idx]} size="700" />
             <div style={{ width: "15px" }} />
             <Stats
-              hero={this.state.hero}
+              hero={this.state.heroes[idx]}
               onStarChange={(n, v) => this.setStars(n, v)}
               onRuneChange={(i, set) => this.setRune(i, set)}
               onRuneClear={(i) => this.clearRune(i)}

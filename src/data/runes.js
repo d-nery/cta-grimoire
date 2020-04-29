@@ -26,30 +26,30 @@ export const Sets = {
 };
 
 // prettier-ignore
-export const Primaries = [
-  { value: "atk",       name: "Attack",                base: 0.06 },
-  { value: "aoe",       name: "Area of Effect",        base: 0.03 },
-  { value: "aps",       name: "Attack Speed",          base: 0.01 },
-  { value: "gold",      name: "Bonus Gold",            base: 0.10 },
-  { value: "ctkdmg",    name: "Critical Damage",       base: 0.05 },
-  { value: "def",       name: "Defence",               base: 0.06 },
-  { value: "hp",        name: "HP",                    base: 0.06 },
-  { value: "ult",       name: "Ultimate Attack",       base: 0.10 },
-  { value: "freeze",    name: "Freeze Time",           base: 0.02 },
-  { value: "stun",      name: "Stun Time",             base: 0.02 },
-  { value: "burn",      name: "Burn Time",             base: 0.02 },
-  { value: "poison",    name: "Poison Time",           base: 0.02 },
-  { value: "ultreload", name: "Ultimate Reload Speed", base: 0.02 },
-];
+export const Primaries = {
+  atk:       { name: "Attack",                base: 0.06 },
+  aoe:       { name: "Area of Effect",        base: 0.03 },
+  aps:       { name: "Attack Speed",          base: 0.01 },
+  gold:      { name: "Bonus Gold",            base: 0.10 },
+  ctkdmg:    { name: "Critical Damage",       base: 0.05 },
+  def:       { name: "Defence",               base: 0.06 },
+  hp:        { name: "HP",                    base: 0.06 },
+  ult:       { name: "Ultimate Attack",       base: 0.10 },
+  freeze:    { name: "Freeze Time",           base: 0.02 },
+  stun:      { name: "Stun Time",             base: 0.02 },
+  burn:      { name: "Burn Time",             base: 0.02 },
+  poison:    { name: "Poison Time",           base: 0.02 },
+  ultreload: { name: "Ultimate Reload Speed", base: 0.02 },
+};
 
 // prettier-ignore
-export const Secondaries = [
-  { value: "atk",      name: "Attack",          base: [0.009, 0.018, 0.027, 0.036, 0.045, 0.054] },
-  { value: "atkrange", name: "Attack Range",    base: [0.006, 0.012, 0.018, 0.024, 0.030, 0.036] },
-  { value: "gold",     name: "Bonus Gold",      base: [0.015, 0.030, 0.045, 0.060, 0.075, 0.090] },
-  { value: "ctkdmg",   name: "Critical Damage", base: [0.008, 0.015, 0.022, 0.030, 0.038, 0.045] },
-  { value: "def",      name: "Defence",         base: [0.009, 0.018, 0.027, 0.036, 0.045, 0.054] },
-  { value: "hp",       name: "HP",              base: [0.009, 0.018, 0.027, 0.036, 0.045, 0.054] },
-  { value: "mvspeed",  name: "Move Speed",      base: [0.003, 0.006, 0.009, 0.012, 0.015, 0.018] },
-  { value: "ult",      name: "Ultimate Attack", base: [0.015, 0.030, 0.045, 0.060, 0.075, 0.090] },
-];
+export const Secondaries = {
+  atk:      { name: "Attack",          base: [0.009, 0.018, 0.027, 0.036, 0.045, 0.054] },
+  atkrange: { name: "Attack Range",    base: [0.006, 0.012, 0.018, 0.024, 0.030, 0.036] },
+  gold:     { name: "Bonus Gold",      base: [0.015, 0.030, 0.045, 0.060, 0.075, 0.090] },
+  ctkdmg:   { name: "Critical Damage", base: [0.008, 0.015, 0.022, 0.030, 0.038, 0.045] },
+  def:      { name: "Defence",         base: [0.009, 0.018, 0.027, 0.036, 0.045, 0.054] },
+  hp:       { name: "HP",              base: [0.009, 0.018, 0.027, 0.036, 0.045, 0.054] },
+  mvspeed:  { name: "Move Speed",      base: [0.003, 0.006, 0.009, 0.012, 0.015, 0.018] },
+  ult:      { name: "Ultimate Attack", base: [0.015, 0.030, 0.045, 0.060, 0.075, 0.090] },
+};

@@ -65,26 +65,32 @@ const setOptions = Object.entries(Sets).map(([k, v]) => {
   };
 });
 
-Primaries.forEach((v) => {
-  v.label = (
-    <img
-      src={`icons/${v.value}.png`}
-      alt={v.name}
-      title={v.name}
-      style={{ width: "35px", height: "35px" }}
-    />
-  );
+const primaryOptions = Object.entries(Primaries).map(([k, v]) => {
+  return {
+    value: k,
+    label: (
+      <img
+        src={`icons/${k}.png`}
+        alt={v.name}
+        title={v.name}
+        style={{ width: "35px", height: "35px" }}
+      />
+    ),
+  };
 });
 
-Secondaries.forEach((v) => {
-  v.label = (
-    <img
-      src={`icons/${v.value}.png`}
-      alt={v.name}
-      title={v.name}
-      style={{ width: "35px", height: "35px" }}
-    />
-  );
+const secondaryOptions = Object.entries(Secondaries).map(([k, v]) => {
+  return {
+    value: k,
+    label: (
+      <img
+        src={`icons/${k}.png`}
+        alt={v.name}
+        title={v.name}
+        style={{ width: "35px", height: "35px" }}
+      />
+    ),
+  };
 });
 
 export default (props) => {
@@ -221,22 +227,22 @@ export default (props) => {
                     </td>
                     <td style={{ padding: "0 .5em " }}>
                       <runes.StyledSelect
-                        options={Primaries}
+                        options={primaryOptions}
                         styles={runes.SelectStyle}
                         placeholder="▼"
                         onChange={(opt) => props.onPrimaryChange(i, opt)}
-                        value={hero.getRune(i) && hero.getRune(i).primary}
+                        value={hero.getRune(i) && hero.getRune(i).primaryOption}
                         isSearchable={false}
                       />
                     </td>
                     {[0, 1, 2, 3].map((j) => (
                       <td key={j}>
                         <runes.StyledSelect
-                          options={Secondaries}
+                          options={secondaryOptions}
                           styles={runes.SelectStyle}
                           placeholder="▼"
                           onChange={(opt) => props.onSecondaryChange(i, j, opt)}
-                          value={hero.getRune(i) && hero.getRune(i).getSecondary(j)}
+                          value={hero.getRune(i) && hero.getRune(i).getSecondaryOption(j)}
                           isSearchable={false}
                         />
                       </td>
