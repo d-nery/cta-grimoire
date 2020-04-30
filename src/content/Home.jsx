@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useEffect, useState } from "react";
 import styled, { createGlobalStyle } from "styled-components";
 import { reset } from "styled-modern-css-reset";
 
@@ -69,128 +69,87 @@ const Panel = styled.div`
   }
 `;
 
-export default class Home extends Component {
-  constructor(props) {
-    super(props);
+export default () => {
+  const [heroes, setHeroes] = useState([new Hero("be")]);
+  const [hero, setHero] = useState(0);
 
-    let heroes = [];
+  useEffect(() => {
+    let _heroes = [];
 
     for (let k of Object.keys(Heroes)) {
-      heroes.push(new Hero(k));
+      _heroes.push(new Hero(k));
     }
 
-    db.defaults({ heroes: heroes, hero: 93 }).write();
+    db.defaults({ heroes: _heroes, hero: 93 }).write();
 
-    this.state = {
-      heroes: db.get("heroes").value(),
-      hero: db.get("hero").value(),
-    };
-  }
+    setHeroes(db.get("heroes").value());
+    setHero(db.get("hero").value());
+  }, []);
 
-  setHero(hero_idx) {
-    db.set("hero", hero_idx).write();
+  useEffect(() => {
+    db.set("hero", hero).write();
+    db.set("heroes", heroes).write();
+  }, [heroes, hero]);
 
-    this.setState({
-      hero: hero_idx,
-    });
-  }
-
-  setStars(n, v) {
+  const setStars = (n, v) => {
     if (isNaN(v)) {
       return;
     }
 
-    const idx = this.state.hero;
-    this.state.heroes[idx][n] = v;
+    heroes[hero][n] = v;
+    setHeroes([...heroes]);
+  };
 
-    db.set("heroes", this.state.heroes).write();
+  const setRune = (i, set) => {
+    heroes[hero].setRune(i, set);
+    setHeroes([...heroes]);
+  };
 
-    this.setState({
-      heroes: this.state.heroes,
-    });
-  }
+  const clearRune = (i) => {
+    heroes[hero].deleteRune(i);
+    setHeroes([...heroes]);
+  };
 
-  setRune(i, set) {
-    const idx = this.state.hero;
-    this.state.heroes[idx].setRune(i, set);
-
-    db.set("heroes", this.state.heroes).write();
-
-    this.setState({
-      heroes: this.state.heroes,
-    });
-  }
-
-  clearRune(i) {
-    const idx = this.state.hero;
-    this.state.heroes[idx].deleteRune(i);
-
-    db.set("heroes", this.state.heroes).write();
-
-    this.setState({
-      hero: this.state.hero,
-    });
-  }
-
-  setPrimary(index, primary) {
-    const idx = this.state.hero;
-
-    if (!this.state.heroes[idx].getRune(index)) {
+  const setPrimary = (index, primary) => {
+    if (!heroes[hero].getRune(index)) {
       return;
     }
 
-    this.state.heroes[idx].getRune(index).primary = primary.value;
-    this.state.heroes[idx]._updateBonuses();
+    heroes[hero].getRune(index).primary = primary.value;
+    heroes[hero]._updateBonuses();
 
-    db.set("heroes", this.state.heroes).write();
+    setHeroes([...heroes]);
+  };
 
-    this.setState({
-      heroes: this.state.heroes,
-    });
-  }
-
-  setSecondary(indexRune, indexSecondary, secondary) {
-    const idx = this.state.hero;
-    if (!this.state.heroes[idx].getRune(indexRune)) {
+  const setSecondary = (indexRune, indexSecondary, secondary) => {
+    if (!heroes[hero].getRune(indexRune)) {
       return;
     }
 
-    this.state.heroes[idx].getRune(indexRune).setSecondary(indexSecondary, secondary.value);
-    this.state.heroes[idx]._updateBonuses();
+    heroes[hero].getRune(indexRune).setSecondary(indexSecondary, secondary.value);
+    heroes[hero]._updateBonuses();
 
-    db.set("heroes", this.state.heroes).write();
+    setHeroes([...heroes]);
+  };
 
-    this.setState({
-      heroes: this.state.heroes,
-    });
-  }
-
-  setRuneStars(i, s) {
-    const idx = this.state.hero;
-
+  const setRuneStars = (i, s) => {
     if (isNaN(s)) {
       return;
     }
 
-    this.state.heroes[idx].getRune(i).stars = s;
-    this.state.heroes[idx]._updateBonuses();
+    heroes[hero].getRune(i).stars = s;
+    heroes[hero]._updateBonuses();
 
-    db.set("heroes", this.state.heroes).write();
+    setHeroes([...heroes]);
+  };
 
-    this.setState({
-      heroes: this.state.heroes,
-    });
-  }
-
-  setRuneLevel(i, l) {
-    const idx = this.state.hero;
-
+  const setRuneLevel = (i, l) => {
     if (isNaN(l)) {
       return;
     }
 
-    let runelvl = this.state.heroes[idx].getRune(i).level;
-    let runestars = this.state.heroes[idx].getRune(i).stars;
+    let runelvl = heroes[hero].getRune(i).level;
+    let runestars = heroes[hero].getRune(i).stars;
 
     if (runelvl <= (runestars * 5) / 10) {
       runelvl *= 10;
@@ -199,40 +158,32 @@ export default class Home extends Component {
       runelvl = l;
     }
 
-    this.state.heroes[idx].getRune(i).level = runelvl;
-    this.state.heroes[idx]._updateBonuses();
+    heroes[hero].getRune(i).level = runelvl;
+    heroes[hero]._updateBonuses();
 
-    db.set("heroes", this.state.heroes).write();
+    setHeroes([...heroes]);
+  };
 
-    this.setState({
-      heroes: this.state.heroes,
-    });
-  }
-
-  render() {
-    const idx = this.state.hero;
-
-    return (
-      <>
-        <GlobalStyle />
-        <HomeDiv>
-          <Navbar heroOptions={this.state.heroes} onHeroChange={(id) => this.setHero(id)} />
-          <Panel>
-            <HeroCard hero={this.state.heroes[idx]} size="700" />
-            <div style={{ width: "15px" }} />
-            <Stats
-              hero={this.state.heroes[idx]}
-              onStarChange={(n, v) => this.setStars(n, v)}
-              onRuneChange={(i, set) => this.setRune(i, set)}
-              onRuneClear={(i) => this.clearRune(i)}
-              onRuneStarChange={(i, v) => this.setRuneStars(i, v)}
-              onRuneLevelChange={(i, v) => this.setRuneLevel(i, v)}
-              onPrimaryChange={(i, p) => this.setPrimary(i, p)}
-              onSecondaryChange={(i, j, p) => this.setSecondary(i, j, p)}
-            />
-          </Panel>
-        </HomeDiv>
-      </>
-    );
-  }
-}
+  return (
+    <>
+      <GlobalStyle />
+      <HomeDiv>
+        <Navbar heroOptions={heroes} onHeroChange={(id) => setHero(id)} />
+        <Panel>
+          <HeroCard hero={heroes[hero]} size="700" />
+          <div style={{ width: "15px" }} />
+          <Stats
+            hero={heroes[hero]}
+            onStarChange={(n, v) => setStars(n, v)}
+            onRuneChange={(i, set) => setRune(i, set)}
+            onRuneClear={(i) => clearRune(i)}
+            onRuneStarChange={(i, v) => setRuneStars(i, v)}
+            onRuneLevelChange={(i, v) => setRuneLevel(i, v)}
+            onPrimaryChange={(i, p) => setPrimary(i, p)}
+            onSecondaryChange={(i, j, p) => setSecondary(i, j, p)}
+          />
+        </Panel>
+      </HomeDiv>
+    </>
+  );
+};
