@@ -1,0 +1,6 @@
+dist/
+dev/
+node_modules/
+coverage/
+.cache/
+.parcel-cache/

@@ -1,9 +1,10 @@
-import React, { Component } from "react";
+import React from "react";
 import Select, { components } from "react-select";
 
 import Logo from "../../assets/CTA_Logo.png";
 import styled from "styled-components";
-import c from "../misc/colors";
+
+import Theme from "~/src/theme/theme";
 
 const NavDiv = styled.div`
   width: 100%;
@@ -44,7 +45,7 @@ const TitleText = styled.text`
   stroke-width: 2px;
 `;
 
-/****** Seacr hbar ******/
+/****** Search hbar ******/
 
 const selectStyle = {
   option: (styles, state) => ({
@@ -54,7 +55,7 @@ const selectStyle = {
   control: (styles) => ({
     ...styles,
     width: 300,
-    backgroundColor: c.baseBrown.darken(0.2).hex(),
+    backgroundColor: Theme.default.body.darken(0.2).hex(),
   }),
   container: (styles) => ({
     ...styles,
@@ -90,7 +91,7 @@ const Option = ({ ...props }) => {
 
 /****** Nav Component ******/
 
-export default (props) => {
+const Navbar = (props) => {
   const options = props.heroOptions.map((v, i) => {
     return { value: i, icon: v.id, label: v.info("name") };
   });
@@ -113,3 +114,5 @@ export default (props) => {
     </NavDiv>
   );
 };
+
+export default Navbar;

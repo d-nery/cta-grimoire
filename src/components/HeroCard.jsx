@@ -89,7 +89,7 @@ const NameText = styled.text`
   text-anchor: middle;
 `;
 
-export default ({ hero }) => {
+const HeroCard = ({ hero }) => {
   const [width, setWidth] = useState(570);
 
   const onResize = () => {
@@ -126,3 +126,5 @@ export default ({ hero }) => {
     </CardDiv>
   );
 };
+
+export default HeroCard;

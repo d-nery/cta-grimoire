@@ -93,7 +93,7 @@ const secondaryOptions = Object.entries(Secondaries).map(([k, v]) => {
   };
 });
 
-export default (props) => {
+const Stats = (props) => {
   const { hero } = props;
 
   const { atk, hp, power, def, aps, mvspeed, ctkdmg, ctkrate, atkrange } = hero.stats;
@@ -266,3 +266,5 @@ export default (props) => {
     </MainPanel>
   );
 };
+
+export default Stats;

@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import CountUp from "react-countup";
 
-import c from "../misc/colors";
-
 const StatWrapper = styled.div`
   display: flex;
   flex-direction: row;
@@ -24,10 +22,10 @@ const StatData = styled.div`
   align-items: center;
   justify-content: space-between;
 
-  background-color: ${c.baseBrown.darken(0.2).hex()};
+  background-color: ${({ theme }) => theme.body.darken(0.2).hex()};
 
   border-radius: 5px;
-  border-color: ${c.baseBrown.darken(0.5).hex()};
+  border-color: ${({ theme }) => theme.body.darken(0.5).hex()};
   border-width: 2px;
   border-style: solid;
 

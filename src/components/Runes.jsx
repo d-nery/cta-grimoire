@@ -1,13 +1,14 @@
 import styled, { keyframes } from "styled-components";
-import c from "../misc/colors";
 import Select from "react-select";
 
+import Theme from "~/src/theme/theme";
+
 export const Panel = styled.div`
-  background-color: ${c.baseBrown.darken(0.2).hex()};
+  background-color: ${({ theme }) => theme.body.darken(0.2).hex()};
   height: 100%;
   margin-bottom: 0.4em;
   border-radius: 5px;
-  border-color: ${c.baseBrown.darken(0.5).hex()};
+  border-color: ${({ theme }) => theme.body.darken(0.5).hex()};
   border-width: 2px;
   border-style: solid;
   display: flex;
@@ -22,12 +23,12 @@ export const Title = styled.div`
   font-family: Avenir;
   color: white;
   font-size: 25px;
-  background-color: ${c.baseBrown.darken(0.1).hex()};
+  background-color: ${({ theme }) => theme.body.darken(0.1).hex()};
 `;
 
 export const Table = styled.table`
   margin: 1em 2em;
-  
+
   th {
     font-family: Avenir;
     color: white;
@@ -42,7 +43,7 @@ export const Inputs = styled.tr`
   input {
     width: 35px;
     height: 35px;
-    background: ${c.baseBrown.hex()};
+    background: ${({ theme }) => theme.body};
     border: none;
     color: white;
     text-align: center;
@@ -71,7 +72,7 @@ export const SelectStyle = {
     ...styles,
     width: 35,
     height: 35,
-    background: c.baseBrown.hex(),
+    background: Theme.default.body.hex(),
     border: "none",
     margin: "auto",
     minHeight: "unset",

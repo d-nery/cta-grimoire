@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import styled, { createGlobalStyle } from "styled-components";
-import { reset } from "styled-modern-css-reset";
+import styled, { ThemeProvider } from "styled-components";
+
+import Theme from "../theme/theme";
+import GlobalStyle from "~/src/theme/global";
 
 import Heroes from "../data/heroes";
-import c from "../misc/colors";
 
 import HeroCard from "../components/HeroCard";
 import Navbar from "../components/Navbar";
@@ -36,23 +37,11 @@ const db = low(
   })
 );
 
-const GlobalStyle = createGlobalStyle`
-  ${reset}
-
-  @font-face {
-    font-family: "Avenir";
-    src: url("fonts/Avenir-Black.ttf") format("truetype");
-    font-weight: 500;
-    font-style: normal;
-  };
-`;
-
 const HomeDiv = styled.div`
-  background-color: ${c.baseBrown.hex()};
+  background-color: ${({ theme }) => theme.body.hex()};
 
   min-height: 100vh;
   min-width: 100vw;
-  /* min-width: 1200px; */
 `;
 
 const Panel = styled.div`
@@ -69,7 +58,7 @@ const Panel = styled.div`
   }
 `;
 
-export default () => {
+const Home = () => {
   const [heroes, setHeroes] = useState([new Hero("be")]);
   const [hero, setHero] = useState(0);
 
@@ -165,25 +154,29 @@ export default () => {
   };
 
   return (
-    <>
-      <GlobalStyle />
-      <HomeDiv>
-        <Navbar heroOptions={heroes} onHeroChange={(id) => setHero(id)} />
-        <Panel>
-          <HeroCard hero={heroes[hero]} size="700" />
-          <div style={{ width: "15px" }} />
-          <Stats
-            hero={heroes[hero]}
-            onStarChange={(n, v) => setStars(n, v)}
-            onRuneChange={(i, set) => setRune(i, set)}
-            onRuneClear={(i) => clearRune(i)}
-            onRuneStarChange={(i, v) => setRuneStars(i, v)}
-            onRuneLevelChange={(i, v) => setRuneLevel(i, v)}
-            onPrimaryChange={(i, p) => setPrimary(i, p)}
-            onSecondaryChange={(i, j, p) => setSecondary(i, j, p)}
-          />
-        </Panel>
-      </HomeDiv>
-    </>
+    <ThemeProvider theme={Theme.default}>
+      <>
+        <GlobalStyle />
+        <HomeDiv>
+          <Navbar heroOptions={heroes} onHeroChange={(id) => setHero(id)} />
+          <Panel>
+            <HeroCard hero={heroes[hero]} size="700" />
+            <div style={{ width: "15px" }} />
+            <Stats
+              hero={heroes[hero]}
+              onStarChange={(n, v) => setStars(n, v)}
+              onRuneChange={(i, set) => setRune(i, set)}
+              onRuneClear={(i) => clearRune(i)}
+              onRuneStarChange={(i, v) => setRuneStars(i, v)}
+              onRuneLevelChange={(i, v) => setRuneLevel(i, v)}
+              onPrimaryChange={(i, p) => setPrimary(i, p)}
+              onSecondaryChange={(i, j, p) => setSecondary(i, j, p)}
+            />
+          </Panel>
+        </HomeDiv>
+      </>
+    </ThemeProvider>
   );
 };
+
+export default Home;

@@ -1,18 +1,16 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 
-import c from "../misc/colors";
-
 const StatRow = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 0.8em;
-  background-color: ${c.baseBrown.darken(0.2).hex()};
+  background-color: ${({ theme }) => theme.body.darken(0.2).hex()};
 
   border-radius: 5px;
-  border-color: ${c.baseBrown.darken(0.5).hex()};
+  border-color: ${({ theme }) => theme.body.darken(0.5).hex()};
   border-width: 2px;
   border-style: solid;
 
@@ -34,7 +32,7 @@ const StatRow = styled.div`
 
   input {
     width: 30px;
-    background: ${c.baseBrown.hex()};
+    background: ${({ theme }) => theme.body.hex()};
     border: none;
     color: white;
     text-align: center;

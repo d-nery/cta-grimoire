@@ -4,6 +4,7 @@
   "dependencies": {
     "bootstrap": "^4.4.1",
     "chroma-js": "^2.1.0",
+    "file-saver": "^2.0.2",
     "lowdb": "^1.0.0",
     "popper.js": "^1.16.1",
     "react": "^16.13.1",
@@ -25,6 +26,8 @@
     "build": "parcel build ./index.html"
   },
   "devDependencies": {
+    "@babel/core": "^7.10.4",
+    "@babel/preset-react": "^7.10.4",
     "esm": "^3.2.25",
     "parcel": "^1.12.4",
     "parcel-plugin-asset-copier": "^1.0.0",
