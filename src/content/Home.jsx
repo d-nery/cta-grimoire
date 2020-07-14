@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from "react";
 import styled, { ThemeProvider } from "styled-components";
 
-import Theme from "../theme/theme";
+import Theme from "~/src/theme/theme";
 import GlobalStyle from "~/src/theme/global";
 
-import Heroes from "../data/heroes";
+import Heroes from "~/src/data/heroes";
+import HeroesSP from "~/src/data/heroes-sp";
 
-import HeroCard from "../components/HeroCard";
-import Navbar from "../components/Navbar";
-import Stats from "../components/Stats";
-import Hero from "../models/Hero";
-import Rune from "../models/Rune";
+import HeroCard from "~/src/components/HeroCard";
+import Navbar from "~/src/components/Navbar";
+import Stats from "~/src/components/Stats";
+import SPCard from "~/src/components/SPCard";
+
+import Hero from "~/src/models/Hero";
+import Rune from "~/src/models/Rune";
 
 import low from "lowdb";
 import LocalStorage from "lowdb/adapters/LocalStorage";
@@ -173,6 +176,7 @@ const Home = () => {
               onSecondaryChange={(i, j, p) => setSecondary(i, j, p)}
             />
           </Panel>
+          <SPCard data={HeroesSP[heroes[hero].id]?.sp1} hero={heroes[hero]} stars={4}></SPCard>
         </HomeDiv>
       </>
     </ThemeProvider>

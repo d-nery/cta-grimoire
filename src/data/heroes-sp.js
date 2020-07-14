@@ -1,9 +1,9 @@
 export default {
-  blue_fish: {
+  bf: {
     sp1: {
       name: "Shoot Bubbles",
-      aoe: 0,
       description: null,
+      aoe: 0,
     },
     sp2: {
       name: "Multi-Shot",
@@ -19,7 +19,7 @@ export default {
     },
     sp4: null,
   },
-  bugo_archer: {
+  bugoa: {
     sp1: {
       name: "Arrows",
       description: "Shoot Arrows",
@@ -39,7 +39,7 @@ export default {
     },
     sp4: null,
   },
-  bugo_fighter: {
+  bugof: {
     sp1: {
       name: "Sword",
       description: null,
@@ -59,7 +59,7 @@ export default {
     },
     sp4: null,
   },
-  bugo_spear: {
+  bugos: {
     sp1: {
       name: "Spear",
       description: null,
@@ -79,7 +79,7 @@ export default {
     },
     sp4: null,
   },
-  bugo_giant: {
+  bugog: {
     sp1: {
       name: "Axe Hit",
       description: null,
@@ -99,7 +99,7 @@ export default {
     },
     sp4: null,
   },
-  ice_knight: {
+  ik: {
     sp1: {
       name: "Sword Hit",
       effect: ["freeze", 10, 2],

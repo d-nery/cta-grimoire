@@ -101,7 +101,7 @@ const Navbar = (props) => {
       <LogoImg src={Logo} />
       <TitleSvg>
         <TitleText x="50%" y="50%">
-          The Grimoire
+          Hero Builder
         </TitleText>
       </TitleSvg>
       <Select
