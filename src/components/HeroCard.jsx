@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect, useLayoutEffect } from "react";
+import React, { useState, useLayoutEffect } from "react";
 import styled, { css, keyframes } from "styled-components";
 
 export const rarities = ["common", "rare", "epic", "legendary"];
@@ -18,6 +18,7 @@ const Wrapper = styled.div`
   left: 0;
   right: 0;
   max-width: 100%;
+  max-height: 100%;
   height: ${(props) => props.height + "px"};
   width: ${(props) => props.width + "px"};
   ${(props) =>
@@ -45,6 +46,10 @@ const Image = styled.img`
   position: absolute;
   z-index: ${(props) => props.z || 0};
   max-width: 100%;
+  max-height: 100%;
+  margin: auto;
+  left: 0;
+  right: 0;
 `;
 
 const Icon = styled.img`
@@ -113,15 +118,15 @@ const HeroCard = ({ hero }) => {
   return (
     <CardDiv id="carddiv">
       <Wrapper height={h} width={w}>
-        <Image src={`cards/${(hero && hero.info("rarity")) || "rare"}.png`} z="0" />
-        <Image src={`cards/${(hero && hero.info("element")) || "dark"}.png`} z="1" />
+        <Image src={`cards/${hero?.info("rarity") || "rare"}.png`} z="0" />
+        <Image src={`cards/${hero?.info("element") || "dark"}.png`} z="1" />
         <NameSvg>
-          <NameText y="50%" x="50%" color={(hero && hero.info("element")) || "dark"}>
-            {(hero && hero.info("name")) || "Dark Hunter"}
+          <NameText y="50%" x="50%" color={hero?.info("element") || "dark"}>
+            {hero?.info("name") || "Dark Hunter"}
           </NameText>
         </NameSvg>
-        <Icon src={`icons/${(hero && hero.info("class")) || "dark"}.png`} />
-        <Avatar src={`hero_art/${(hero && hero.id) || "dh"}.png`} />
+        <Icon src={`icons/${hero?.info("class") || "dark"}.png`} />
+        <Avatar src={`hero_art/${hero?.id || "dh"}.png`} />
       </Wrapper>
     </CardDiv>
   );

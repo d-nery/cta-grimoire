@@ -2,7 +2,6 @@
   "name": "cta-calc",
   "version": "0.1.0",
   "dependencies": {
-    "bootstrap": "^4.4.1",
     "chroma-js": "^2.1.0",
     "file-saver": "^2.0.2",
     "lowdb": "^1.0.0",

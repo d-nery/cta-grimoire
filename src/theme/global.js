@@ -7,6 +7,7 @@ const GlobalStyle = createGlobalStyle`
   body {
     background-color: ${({ theme }) => theme.body.hex()};
     color: ${({ theme }) => theme.text.hex()};
+    font-family: Avenir;
   }
 
   @font-face {

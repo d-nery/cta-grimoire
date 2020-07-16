@@ -47,6 +47,12 @@ const HomeDiv = styled.div`
   min-width: 100vw;
 `;
 
+const ContentWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
 const Panel = styled.div`
   width: 100%;
   min-height: 700px;
@@ -156,27 +162,36 @@ const Home = () => {
     setHeroes([...heroes]);
   };
 
+  const currentHero = heroes[hero];
+
   return (
     <ThemeProvider theme={Theme.default}>
       <>
         <GlobalStyle />
         <HomeDiv>
           <Navbar heroOptions={heroes} onHeroChange={(id) => setHero(id)} />
-          <Panel>
-            <HeroCard hero={heroes[hero]} size="700" />
-            <div style={{ width: "15px" }} />
-            <Stats
-              hero={heroes[hero]}
-              onStarChange={(n, v) => setStars(n, v)}
-              onRuneChange={(i, set) => setRune(i, set)}
-              onRuneClear={(i) => clearRune(i)}
-              onRuneStarChange={(i, v) => setRuneStars(i, v)}
-              onRuneLevelChange={(i, v) => setRuneLevel(i, v)}
-              onPrimaryChange={(i, p) => setPrimary(i, p)}
-              onSecondaryChange={(i, j, p) => setSecondary(i, j, p)}
-            />
-          </Panel>
-          <SPCard data={HeroesSP[heroes[hero].id]?.sp1} hero={heroes[hero]} stars={4}></SPCard>
+          <ContentWrapper>
+            <Panel>
+              <HeroCard hero={currentHero} size="700" />
+              <div style={{ width: "15px" }} />
+              <Stats
+                hero={currentHero}
+                onStarChange={(n, v) => setStars(n, v)}
+                onRuneChange={(i, set) => setRune(i, set)}
+                onRuneClear={(i) => clearRune(i)}
+                onRuneStarChange={(i, v) => setRuneStars(i, v)}
+                onRuneLevelChange={(i, v) => setRuneLevel(i, v)}
+                onPrimaryChange={(i, p) => setPrimary(i, p)}
+                onSecondaryChange={(i, j, p) => setSecondary(i, j, p)}
+              />
+            </Panel>
+            <div style={{ display: "flex" }}>
+              <SPCard data={HeroesSP[currentHero.id]?.sp1} hero={currentHero} stars={1}></SPCard>
+              <SPCard data={HeroesSP[currentHero.id]?.sp2} hero={currentHero} stars={2}></SPCard>
+              <SPCard data={HeroesSP[currentHero.id]?.sp3} hero={currentHero} stars={3}></SPCard>
+              <SPCard data={HeroesSP[currentHero.id]?.sp4} hero={currentHero} stars={4}></SPCard>
+            </div>
+          </ContentWrapper>
         </HomeDiv>
       </>
     </ThemeProvider>
