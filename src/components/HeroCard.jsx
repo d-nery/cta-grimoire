@@ -125,7 +125,7 @@ const HeroCard = ({ hero }) => {
             {hero?.info("name") || "Dark Hunter"}
           </NameText>
         </NameSvg>
-        <Icon src={`icons/${hero?.info("class") || "dark"}.png`} />
+        <Image src={`cards/${hero?.info("class") || "dark"}.png`} z="2" />
         <Avatar src={`hero_art/${hero?.id || "dh"}.png`} />
       </Wrapper>
     </CardDiv>

@@ -19,7 +19,7 @@ import low from "lowdb";
 import LocalStorage from "lowdb/adapters/LocalStorage";
 
 const db = low(
-  new LocalStorage("cta-grimoire-db-1", {
+  new LocalStorage("cta-grimoire-db-2", {
     deserialize: (data) => {
       let db = JSON.parse(data);
 

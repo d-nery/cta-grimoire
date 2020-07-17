@@ -45,12 +45,13 @@ const TitleText = styled.text`
   stroke-width: 2px;
 `;
 
-/****** Search hbar ******/
+/****** Search bar ******/
 
 const selectStyle = {
   option: (styles, state) => ({
     ...styles,
     fontFamily: "Avenir",
+    color: "black",
   }),
   control: (styles) => ({
     ...styles,
