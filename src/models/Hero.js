@@ -85,16 +85,22 @@ export default class Hero {
   }
 
   get stats() {
+    const atk = this.stat("atk") * this.multiplier * (1 + this.bonuses.atk);
+    const ctkdmg = this.stat("ctkdmg") + this.bonuses.ctkdmg * 100;
+    const ctkrate = this.stat("ctkrate") + this.bonuses.ctkrate * 100;
+    const aps = this.stat("aps") * (1 + this.bonuses.aps);
+
     return {
-      atk: this.stat("atk") * this.multiplier * (1 + this.bonuses.atk),
+      atk: atk,
       hp: this.stat("hp") * this.multiplier * (1 + this.bonuses.hp),
       def: this.stat("def") * this.multiplier * (1 + this.bonuses.def),
-      aps: this.stat("aps") * (1 + this.bonuses.aps),
+      aps: aps,
       mvspeed: this.stat("mvspeed") * (1 + this.bonuses.mvspeed),
-      ctkdmg: this.stat("ctkdmg") + this.bonuses.ctkdmg * 100,
-      ctkrate: this.stat("ctkrate") + this.bonuses.ctkrate * 100,
+      ctkdmg: ctkdmg,
+      ctkrate: ctkrate,
       atkrange: this.stat("atkrange") * (1 + this.bonuses.atkrange),
       power: 200 * this.multiplier * (1 + this.bonuses.power),
+      dps: atk * (1 + (ctkrate / 100) * (ctkdmg / 100)) * aps,
     };
   }
 

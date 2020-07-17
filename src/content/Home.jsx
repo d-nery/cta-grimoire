@@ -68,7 +68,7 @@ const Panel = styled.div`
 `;
 
 const Home = () => {
-  const [heroes, setHeroes] = useState([new Hero("be")]);
+  const [heroes, setHeroes] = useState([new Hero("bf")]);
   const [hero, setHero] = useState(0);
 
   useEffect(() => {
@@ -78,7 +78,7 @@ const Home = () => {
       _heroes.push(new Hero(k));
     }
 
-    db.defaults({ heroes: _heroes, hero: 93 }).write();
+    db.defaults({ heroes: _heroes, hero: 35 }).write();
 
     setHeroes(db.get("heroes").value());
     setHero(db.get("hero").value());

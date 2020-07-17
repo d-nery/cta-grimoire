@@ -25,7 +25,7 @@ const Wrapper = styled.div`
     css`
       ${NameSvg} {
         height: ${Math.round(0.05 * props.height)}px;
-        font: bold ${Math.round(0.04 * props.height)}px Avenir;
+        font: bold ${Math.round(0.035 * props.height)}px Avenir;
       }
 
       ${NameText} {
@@ -50,14 +50,6 @@ const Image = styled.img`
   margin: auto;
   left: 0;
   right: 0;
-`;
-
-const Icon = styled.img`
-  position: absolute;
-  z-index: 3;
-  height: 5%;
-  top: 11.7%;
-  right: 16.2%;
 `;
 
 const AvatarAnim = keyframes`

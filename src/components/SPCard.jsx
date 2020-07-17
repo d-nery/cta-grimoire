@@ -59,7 +59,7 @@ const Name = styled.div`
 
 const Description = styled.div`
   font-size: 0.8em;
-  margin-bottom: 0.5em;
+  margin-bottom: auto;
 `;
 
 const DataWrapper = styled.div`
@@ -103,7 +103,7 @@ const Lock = styled.div`
   }
 `;
 
-const Data = ({ value, bonus, icon, title }) => {
+const Data = ({ value, bonus, icon, title, suffix }) => {
   if (!value) {
     return null;
   }
@@ -113,16 +113,15 @@ const Data = ({ value, bonus, icon, title }) => {
       <div>
         <img src={`icons/${icon}.png`} title={title} />
       </div>
-      <span>{Math.round(bonus < 0 ? value / (1 - bonus) : value * (bonus + 1))}</span>
+      <span>
+        {Math.round(bonus < 0 ? value / (1 - bonus) : value * (bonus + 1))}
+        {suffix}
+      </span>
     </DataWrapper>
   );
 };
 
 const Effect = ({ value, bonuses, type, duration }) => {
-  if (!value) {
-    return null;
-  }
-
   const found = !!bonuses[type + "ch"];
 
   const ch_bonus = bonuses[type + "ch"] || 0;
@@ -133,7 +132,7 @@ const Effect = ({ value, bonuses, type, duration }) => {
       <div>
         <img src={`icons/${found ? type + "tm" : type}.png`} title={type} />
       </div>
-      <span>{Math.round(value + ch_bonus * 100)}%</span>
+      <span>{value > 0 && Math.round(value + ch_bonus * 100) + "%"}</span>
       {duration > 0 && (
         <>
           <div style={{ marginLeft: "0.1em" }}>
@@ -166,6 +165,30 @@ const SPCard = ({ data, hero, stars }) => {
     ));
   }
 
+  let buffs = null;
+  if (data.type) {
+    buffs = (
+      <>
+        <Data
+          value={data.value[Math.max(hero.yellow - stars, 0)]}
+          bonus={0}
+          icon={data.type[1]}
+          suffix="%"
+        />
+        <DataWrapper>
+          <span>Affects: </span>
+          {data.affects == "all" ? (
+            <span>All</span>
+          ) : (
+            <div>
+              <img src={`icons/${data.affects}.png`} />
+            </div>
+          )}
+        </DataWrapper>
+      </>
+    );
+  }
+
   return (
     <CardDiv>
       <StarsDiv>
@@ -173,7 +196,7 @@ const SPCard = ({ data, hero, stars }) => {
           <StarImg key={i} src="icons/ystar.png" />
         ))}
       </StarsDiv>
-      {stars == 3 ? <Icon src={`hero_sp/${hero.id}.png`} /> : <></>}
+      {stars == 3 && <Icon src={`hero_sp/${hero.id}.png`} />}
       {data.timed && (
         <Time>
           <div>
@@ -183,9 +206,10 @@ const SPCard = ({ data, hero, stars }) => {
         </Time>
       )}
       <Name>{data.name}</Name>
-      {data.description ? <Description>{data.description}</Description> : <></>}
+      {data.description && <Description>{data.description}</Description>}
 
       {effects}
+      {buffs}
 
       <Data value={data.aoe} bonus={hero.bonuses.aoe} icon="aoe" title="AoE" />
       <Data
@@ -194,6 +218,7 @@ const SPCard = ({ data, hero, stars }) => {
         icon="time"
         title="CD"
         style={{ marginTop: "0.2em" }}
+        suffix="s"
       />
       <Lock active={hero.yellow >= stars}>
         <img src="icons/lock.png" />
