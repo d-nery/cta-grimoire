@@ -122,15 +122,13 @@ const Data = ({ value, bonus, icon, title, suffix }) => {
 };
 
 const Effect = ({ value, bonuses, type, duration }) => {
-  const found = !!bonuses[type + "ch"];
-
   const ch_bonus = bonuses[type + "ch"] || 0;
   const tm_bonus = bonuses[type + "tm"] || 0;
 
   return (
     <DataWrapper>
       <div>
-        <img src={`icons/${found ? type + "tm" : type}.png`} title={type} />
+        <img src={`icons/${type}.png`} title={type} />
       </div>
       <span>{value > 0 && Math.round(value + ch_bonus * 100) + "%"}</span>
       {duration > 0 && (
