@@ -8,7 +8,6 @@ const GlobalStyle = createGlobalStyle`
     background-color: ${({ theme }) => theme.body.hex()};
     color: ${({ theme }) => theme.text.hex()};
     font-family: Avenir;
-    overflow-x: hidden;
   }
 
   @font-face {

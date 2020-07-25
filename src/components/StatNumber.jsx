@@ -6,12 +6,12 @@ const StatWrapper = styled.div`
   display: flex;
   flex-direction: row;
   margin-bottom: 0.4em;
-  width: 300px;
+  width: ${({ w }) => w + "px"};
   align-items: center;
 
   @media (max-width: 768px) {
     flex-direction: column;
-    width: 200px;
+    width: ${({ w, hasBonus }) => (w > 200 && hasBonus ? "200px" : w + "px")};
     height: 75px;
   }
 `;
@@ -30,7 +30,7 @@ const StatData = styled.div`
   border-style: solid;
 
   padding: 5px 10px;
-  width: 200px;
+  width: ${({ w }) => w + "px"};
   color: white;
   font-family: Avenir;
   font-size: 20px;
@@ -52,10 +52,12 @@ const StatBonus = styled.div`
   font-family: Avenir;
 `;
 
-const StatNumber = ({ icon, title, ini = 0, unit, value, bonus, dec = 0 }) => {
+const StatNumber = ({ icon, title, ini = 0, unit, value, bonus, dec = 0, w = 300 }) => {
+  const hasBonus = bonus != null;
+
   return (
-    <StatWrapper>
-      <StatData>
+    <StatWrapper w={w} hasBonus={hasBonus}>
+      <StatData w={hasBonus ? w - 100 : w}>
         <div>
           <img src={`icons/${icon}.png`} title={title} />
         </div>
@@ -69,7 +71,7 @@ const StatNumber = ({ icon, title, ini = 0, unit, value, bonus, dec = 0 }) => {
           )}
         </CountUp>
       </StatData>
-      <StatBonus>{bonus ? `+${(bonus * 100).toFixed(2)}%` : ""}</StatBonus>
+      {hasBonus && <StatBonus>{bonus ? `+${(bonus * 100).toFixed(2)}%` : ""}</StatBonus>}
     </StatWrapper>
   );
 };

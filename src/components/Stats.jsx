@@ -29,6 +29,7 @@ const LeftPanel = styled.div`
     flex-direction: row;
     flex-wrap: wrap;
     width: 100%;
+    margin-right: 0em;
     justify-content: space-around;
   }
 `;
@@ -175,7 +176,7 @@ const Stats = (props) => {
         />
 
         <div style={{ marginTop: "auto" }}>
-          <StatNumber ini={ini.power} value={power} icon="power" title="Power" />
+          <StatNumber ini={ini.power} value={power} bonus={0} icon="power" title="Power" />
         </div>
       </LeftPanel>
       <RightPanel>

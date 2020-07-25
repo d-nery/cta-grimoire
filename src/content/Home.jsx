@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import styled, { ThemeProvider } from "styled-components";
+import styled, { ThemeProvider, css } from "styled-components";
 
 import Theme from "~/src/theme/theme";
 import GlobalStyle from "~/src/theme/global";
@@ -11,6 +11,8 @@ import HeroCard from "~/src/components/HeroCard";
 import Navbar from "~/src/components/Navbar";
 import Stats from "~/src/components/Stats";
 import SPCard from "~/src/components/SPCard";
+import Footer from "~/src/components/Footer";
+import ExtraStats from "~/src/components/ExtraStats";
 
 import Hero from "~/src/models/Hero";
 import Rune from "~/src/models/Rune";
@@ -44,7 +46,14 @@ const HomeDiv = styled.div`
   background-color: ${({ theme }) => theme.body.hex()};
 
   min-height: 100vh;
-  min-width: 100vw;
+  position: relative;
+  padding-bottom: calc(50px + 2em);
+
+  @media (max-width: 768px) {
+    padding-bottom: calc(100px + 2em);
+  }
+
+  width: 100%;
 `;
 
 const ContentWrapper = styled.div`
@@ -53,7 +62,7 @@ const ContentWrapper = styled.div`
   align-items: center;
 `;
 
-const Panel = styled.div`
+const UpperPanel = styled.div`
   width: 100%;
   min-height: 700px;
   display: flex;
@@ -64,6 +73,64 @@ const Panel = styled.div`
 
   @media (max-width: 768px) {
     flex-direction: column;
+  }
+`;
+
+const LowerPanel = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: center;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+`;
+
+const sectionCss = css`
+  display: flex;
+  flex-direction: column;
+  background-color: ${({ theme }) => theme.body.darken(0.1)};
+  padding: 0.3em 0.5em;
+
+  border-radius: 10px;
+  border-color: ${({ theme }) => theme.body.darken(0.5).hex()};
+  border-width: 2px;
+  border-style: solid;
+
+  align-items: center;
+`;
+
+const SPDiv = styled.div`
+  ${sectionCss}
+
+  margin-right: 2em;
+
+  @media (max-width: 768px) {
+    margin-bottom: 2em;
+    margin-right: 0;
+  }
+
+  & > span {
+    margin-left: 1em;
+  }
+
+  & > div {
+    display: flex;
+
+    @media (max-width: 768px) {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  }
+`;
+
+const ExtrasDiv = styled.div`
+  ${sectionCss}
+
+  & > span {
+    /* margin-left: 1em; */
   }
 `;
 
@@ -171,7 +238,7 @@ const Home = () => {
         <HomeDiv>
           <Navbar heroOptions={heroes} onHeroChange={(id) => setHero(id)} />
           <ContentWrapper>
-            <Panel>
+            <UpperPanel>
               <HeroCard hero={currentHero} size="700" />
               <div style={{ width: "15px" }} />
               <Stats
@@ -184,14 +251,40 @@ const Home = () => {
                 onPrimaryChange={(i, p) => setPrimary(i, p)}
                 onSecondaryChange={(i, j, p) => setSecondary(i, j, p)}
               />
-            </Panel>
-            <div style={{ display: "flex" }}>
-              <SPCard data={HeroesSP[currentHero.id]?.sp1} hero={currentHero} stars={1}></SPCard>
-              <SPCard data={HeroesSP[currentHero.id]?.sp2} hero={currentHero} stars={2}></SPCard>
-              <SPCard data={HeroesSP[currentHero.id]?.sp3} hero={currentHero} stars={3}></SPCard>
-              <SPCard data={HeroesSP[currentHero.id]?.sp4} hero={currentHero} stars={4}></SPCard>
-            </div>
+            </UpperPanel>
+            <LowerPanel>
+              <SPDiv>
+                <span>Skills</span>
+                <div>
+                  <SPCard
+                    data={HeroesSP[currentHero.id]?.sp1}
+                    hero={currentHero}
+                    stars={1}
+                  ></SPCard>
+                  <SPCard
+                    data={HeroesSP[currentHero.id]?.sp2}
+                    hero={currentHero}
+                    stars={2}
+                  ></SPCard>
+                  <SPCard
+                    data={HeroesSP[currentHero.id]?.sp3}
+                    hero={currentHero}
+                    stars={3}
+                  ></SPCard>
+                  <SPCard
+                    data={HeroesSP[currentHero.id]?.sp4}
+                    hero={currentHero}
+                    stars={4}
+                  ></SPCard>
+                </div>
+              </SPDiv>
+              <ExtrasDiv>
+                <span>Extras</span>
+                <ExtraStats hero={currentHero} />
+              </ExtrasDiv>
+            </LowerPanel>
           </ContentWrapper>
+          <Footer></Footer>
         </HomeDiv>
       </>
     </ThemeProvider>

@@ -96,11 +96,13 @@ export default class Hero {
       def: this.stat("def") * this.multiplier * (1 + this.bonuses.def),
       aps: aps,
       mvspeed: this.stat("mvspeed") * (1 + this.bonuses.mvspeed),
+      resist: this.stat("resist") + this.bonuses.resist * 100,
+      dodge: this.stat("dodge") + this.bonuses.dodge * 100,
       ctkdmg: ctkdmg,
       ctkrate: ctkrate,
       atkrange: this.stat("atkrange") * (1 + this.bonuses.atkrange),
       power: 200 * this.multiplier * (1 + this.bonuses.power),
-      dps: atk * (1 + (ctkrate / 100) * (ctkdmg / 100)) * aps,
+      dps: ((1 - ctkrate / 100) * atk + (ctkrate / 100) * atk * (ctkdmg / 100)) * aps,
     };
   }
 

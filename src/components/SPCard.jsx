@@ -8,8 +8,13 @@ const CardDiv = styled.div`
   display: flex;
   flex-direction: column;
   padding: 0.8em;
-  margin: 0 1em;
+  margin: 0.5em;
+
   border-radius: 10px;
+  border-color: ${({ theme }) => theme.body.darken(0.5).hex()};
+  border-width: 2px;
+  border-style: solid;
+
   text-align: center;
   width: 200px;
 `;
@@ -17,7 +22,7 @@ const CardDiv = styled.div`
 const StarsDiv = styled.div`
   display: flex;
   justify-content: center;
-  margin-bottom: 0.3em;
+  margin-bottom: 0.5em;
 `;
 
 const StarImg = styled.img`

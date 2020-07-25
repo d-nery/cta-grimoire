@@ -821,6 +821,120 @@ export default {
       value: [25, 50, 75, 100],
     },
   },
+  tnt: {
+    sp1: {
+      name: "Fire bombs",
+      description: sk_desc.WpnShoot,
+    },
+    sp2: {
+      name: "Kamikaze Summon",
+      description: sk_desc.SpawnBombs,
+      effect: [["burn", 100, 4]],
+      aoe: 250,
+    },
+    sp3: {
+      name: "Super Bomb",
+      description: sk_desc.SP3_WeaponSummon,
+      aoe: 300,
+      cd: 30,
+    },
+    sp4: {
+      name: "Buff Burn Duration",
+      type: ["buff", "burntm"],
+      affects: "fire",
+      value: [10, 20, 30, 40],
+    },
+  },
+  torch: {
+    sp1: {
+      name: "Fireball",
+      description: sk_desc.WpnShoot_ElementalUnique("fire"),
+    },
+    sp2: {
+      name: "Burning Flame",
+      description: sk_desc.WpnShoot_ElementalUnique("fire"),
+      effect: [["burn", 100, 5]],
+      aoe: 400,
+    },
+    sp3: {
+      name: "Super Flamethrower",
+      description: sk_desc.SP3_BreathFire,
+      effect: [["burn", 100, 2]],
+      aoe: 500,
+      cd: 30,
+    },
+    sp4: {
+      name: "Buff Burn Damage",
+      type: ["buff", "burndmg"],
+      affects: "fire",
+      value: [50, 100, 150, 200],
+    },
+  },
+  alda: {
+    sp1: {
+      name: "Flaming Arrows",
+      description: sk_desc.WpnShoot_Arrows("fire"),
+      effect: [["burn", 30, 5]],
+    },
+    sp2: {
+      name: "Multi Fire Arrows",
+      description: sk_desc.WpnShoot_ArrowsMulti("fire"),
+      effect: [["burn", 10, 5]],
+      aoe: 250,
+    },
+    sp3: {
+      name: "Arrow Shower",
+      description: sk_desc.SP3_Arrows,
+      effect: [["burn", 30, 5]],
+      aoe: 100,
+      cd: 30,
+    },
+    sp4: {
+      name: "Buff Critical Damage",
+      type: ["buff", "ctkdmg"],
+      affects: "all",
+      value: [300, 600, 900, 1200],
+    },
+  },
+  scud: {
+    sp1: {
+      name: "Shoot Missiles",
+      description: sk_desc.WpnShoot_Explosive,
+      aoe: 100,
+    },
+    sp2: {
+      name: "Missile Shot",
+      description: sk_desc.WpnShoot_Explosive,
+      aoe: 150,
+    },
+    sp3: {
+      name: "Missile Rain",
+      description: sk_desc.SP3_WeaponRain("fire"),
+      effect: [["burn", 30, 5]],
+      aoe: 300,
+      cd: 30,
+    },
+    sp4: AtkBuff("all"),
+  },
+  voodooa: {
+    sp1: {
+      name: "Arrows",
+      description: sk_desc.WpnShoot_Arrows("earth"),
+      effect: [["poison", 20, 5]],
+    },
+    sp2: {
+      name: "Multi Arrows",
+      description: sk_desc.WpnShoot_ArrowsMulti("earth"),
+      effect: [["poison", 10, 5]],
+    },
+    sp3: {
+      name: "Arrow Shower",
+      description: sk_desc.SP3_Arrows,
+      aoe: 100,
+      cd: 30,
+    },
+    sp4: null,
+  },
 
   trickster: {
     sp1: {

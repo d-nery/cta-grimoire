@@ -6,6 +6,7 @@ import Theme from "~/src/theme/theme";
 export const Panel = styled.div`
   background-color: ${({ theme }) => theme.body.darken(0.2).hex()};
   height: 100%;
+  margin: auto;
   margin-bottom: 0.4em;
   border-radius: 5px;
   border-color: ${({ theme }) => theme.body.darken(0.5).hex()};

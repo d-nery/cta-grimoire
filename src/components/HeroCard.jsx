@@ -67,6 +67,7 @@ const Avatar = styled.img`
   right: 0;
   max-height: 90%;
   max-width: 100%;
+  margin: auto;
   animation: ${AvatarAnim} 5s ease-in-out infinite;
 `;
 
