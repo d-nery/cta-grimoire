@@ -253,7 +253,7 @@ const Home = () => {
               />
             </UpperPanel>
             <LowerPanel>
-              <SPDiv>
+              {/* <SPDiv>
                 <span>Skills</span>
                 <div>
                   <SPCard
@@ -277,7 +277,7 @@ const Home = () => {
                     stars={4}
                   ></SPCard>
                 </div>
-              </SPDiv>
+              </SPDiv> */}
               <ExtrasDiv>
                 <span>Extras</span>
                 <ExtraStats hero={currentHero} />

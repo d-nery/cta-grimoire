@@ -935,6 +935,148 @@ export default {
     },
     sp4: null,
   },
+  voodoos: {
+    sp1: {
+      name: "Spear Hit",
+      description: sk_desc.WpnStrike,
+      effect: [["poison", 20, 5]],
+    },
+    sp2: {
+      name: "Piercing Multi-Hit",
+      description: sk_desc.WpnStrike_PiercingThrust,
+    },
+    sp3: {
+      name: "Spear Wave",
+      description: sk_desc.SP3_SpearWave,
+      cd: 30,
+    },
+    sp4: null,
+  },
+  sprout: {
+    sp1: {
+      name: "Seed Shot",
+      description: sk_desc.EnergyBall("earth"),
+    },
+    sp2: {
+      name: "Seed Blat",
+      description: sk_desc.EnergyBall_Rapid("earth"),
+    },
+    sp3: {
+      name: "Rock Rain",
+      description: sk_desc.SP3_EnergyBall("earth"),
+      aoe: 300,
+      cd: 30,
+    },
+    sp4: null,
+  },
+  voodood: {
+    sp1: {
+      name: "Sword",
+      description: sk_desc.WpnStrike,
+      effect: [["poison", 20, 5]],
+    },
+    sp2: {
+      name: "Multi-Hit",
+      description: sk_desc.WpnStrike_Multi,
+    },
+    sp3: {
+      name: "Sword Storm",
+      description: sk_desc.SP3_WeaponRain("earth"),
+      aoe: 300,
+      cd: 30,
+    },
+    sp4: null,
+  },
+  pumpking: {
+    sp1: {
+      name: "Pumpkin Bite",
+      description: sk_desc.WpnStrike_Bite,
+      effect: [["poison", 10, 7]],
+    },
+    sp2: {
+      name: "Poisonous Spurt",
+      description: "Throw a spurt damaging and poisoning heroes within range",
+      effect: [["poison", 30, 7]],
+    },
+    sp3: {
+      name: "Pumpkin Bomb",
+      description: sk_desc.SP3_WeaponRain("earth"),
+      effect: [["poison", 100, 14]],
+      aoe: 300,
+      cd: 30,
+    },
+    sp4: {
+      name: "Buff Poison Damage",
+      type: ["buff", "poisondmg"],
+      affects: "earth",
+      value: [50, 100, 150, 200],
+    },
+  },
+  musashi: {
+    sp1: {
+      name: "Katana Hit",
+      description: sk_desc.WpnStrike,
+    },
+    sp2: {
+      name: "Piercing Hit",
+      description: sk_desc.WpnStrike_Pierce,
+    },
+    sp3: {
+      name: "Random Hits",
+      description: sk_desc.SP3_BigHit,
+      cd: 30,
+    },
+    sp4: {
+      name: "Buff Move Speed",
+      type: ["buff", "mvspeed"],
+      affects: "earth",
+      value: [25, 50, 75, 100],
+    },
+  },
+  groovine: {
+    sp1: {
+      name: "Gaïa Ball",
+      description: sk_desc.EnergyBall("earth"),
+    },
+    sp2: {
+      name: "Bee Swarm",
+      description: "Releases a swarm of bees that distract and slows down the enemy",
+      effect: [["slowdown", 43, 6]]
+    },
+    sp3: {
+      name: "Forest Strength",
+      description: sk_desc.ElementalAtkEA,
+      cd: 60,
+    },
+    sp4: {
+      name: "Buff Move Speed",
+      type: ["buff", "mvspeed"],
+      affects: "earth",
+      value: [25, 50, 75, 100],
+    },
+  },
+  rh: {
+    sp1: {
+      name: "Arrows",
+      description: sk_desc.WpnShoot_Arrows("earth"),
+    },
+    sp2: {
+      name: "Multi Fire",
+      description: sk_desc.WpnShoot_ArrowsMulti("earth"),
+      effect: [["slowdown", 43, 6]]
+    },
+    sp3: {
+      name: "Forest Strength",
+      description: sk_desc.SP3_Arrows,
+      cd: 60,
+    },
+    sp4: {
+      name: "Buff Critical Damage",
+      type: ["buff", "ctkdmg"],
+      affects: "earth",
+      value: [200, 400, 600, 800],
+    },
+  },
 
   trickster: {
     sp1: {

@@ -48,7 +48,7 @@ const Footer = () => {
         This tool is not affiliated with Godzi Lab. All heroes and assets belong to Godzi Lab and
         are taken from the game and community.
       </span>
-      <div>Discord | GitHub</div>
+      <div>{/*Discord | GitHub*/}</div>
     </FooterDiv>
   );
 };
