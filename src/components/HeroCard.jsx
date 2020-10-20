@@ -40,6 +40,7 @@ const borders = new Map([
   ["water", "#0042a8"],
   ["light", "#ac4a00"],
   ["dark", "#230041"],
+  ["ld", "#230041"],
 ]);
 
 const Image = styled.img`
