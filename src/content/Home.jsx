@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import styled, { ThemeProvider, css } from "styled-components";
 
 import Theme from "~/src/theme/theme";
@@ -19,6 +19,9 @@ import Rune from "~/src/models/Rune";
 
 import low from "lowdb";
 import LocalStorage from "lowdb/adapters/LocalStorage";
+import { encode } from "../deep-link/coder";
+import { fromUrl } from "../deep-link/import-hero";
+import { Share } from "../sharing/Share";
 
 const db = low(
   new LocalStorage("cta-grimoire-db-2", {
@@ -103,7 +106,7 @@ const sectionCss = css`
 `;
 
 const SPDiv = styled.div`
-  ${sectionCss}
+  ${sectionCss};
 
   margin-right: 2em;
 
@@ -231,6 +234,9 @@ const Home = () => {
 
   const currentHero = heroes[hero];
 
+  const importedHero = fromUrl()
+
+
   return (
     <ThemeProvider theme={Theme.default}>
       <>
@@ -238,6 +244,10 @@ const Home = () => {
         <HomeDiv>
           <Navbar heroOptions={heroes} onHeroChange={(id) => setHero(id)} />
           <ContentWrapper>
+
+            { !importedHero?.id && <Share hero={currentHero}/>}
+            { importedHero?.id && "Below is the hero someone shared with you."}
+
             <UpperPanel>
               <HeroCard hero={currentHero} size="700" />
               <div style={{ width: "15px" }} />
