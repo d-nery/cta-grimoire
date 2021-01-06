@@ -1,25 +1,20 @@
-import React, { useCallback, useEffect, useState } from "react";
-import styled, { ThemeProvider, css } from "styled-components";
+import low from "lowdb";
+import LocalStorage from "lowdb/adapters/LocalStorage";
+import React, { useEffect, useState } from "react";
+import styled, { ThemeProvider } from "styled-components";
 
-import Theme from "~/src/theme/theme";
-import GlobalStyle from "~/src/theme/global";
+import Footer from "~/src/components/Footer";
+import Navbar from "~/src/components/Navbar";
 
 import Heroes from "~/src/data/heroes";
-import HeroesSP from "~/src/data/heroes-sp";
-
-import HeroCard from "~/src/components/HeroCard";
-import Navbar from "~/src/components/Navbar";
-import Stats from "~/src/components/Stats";
-import SPCard from "~/src/components/SPCard";
-import Footer from "~/src/components/Footer";
-import ExtraStats from "~/src/components/ExtraStats";
+import { Hero as HeroView } from "../hero-card/Hero";
 
 import Hero from "~/src/models/Hero";
 import Rune from "~/src/models/Rune";
+import GlobalStyle from "~/src/theme/global";
 
-import low from "lowdb";
-import LocalStorage from "lowdb/adapters/LocalStorage";
-import { encode } from "../deep-link/coder";
+import Theme from "~/src/theme/theme";
+
 import { fromUrl } from "../deep-link/import-hero";
 import { Share } from "../sharing/Share";
 
@@ -42,7 +37,7 @@ const db = low(
 
       return db;
     },
-  })
+  }),
 );
 
 const HomeDiv = styled.div`
@@ -65,77 +60,6 @@ const ContentWrapper = styled.div`
   align-items: center;
 `;
 
-const UpperPanel = styled.div`
-  width: 100%;
-  min-height: 700px;
-  display: flex;
-  flex-direction: row;
-  padding: 0 0.5em 0.5em 0.5em;
-  align-items: stretch;
-  justify-content: center;
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-  }
-`;
-
-const LowerPanel = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  align-items: stretch;
-  justify-content: center;
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-  }
-`;
-
-const sectionCss = css`
-  display: flex;
-  flex-direction: column;
-  background-color: ${({ theme }) => theme.body.darken(0.1)};
-  padding: 0.3em 0.5em;
-
-  border-radius: 10px;
-  border-color: ${({ theme }) => theme.body.darken(0.5).hex()};
-  border-width: 2px;
-  border-style: solid;
-
-  align-items: center;
-`;
-
-const SPDiv = styled.div`
-  ${sectionCss};
-
-  margin-right: 2em;
-
-  @media (max-width: 768px) {
-    margin-bottom: 2em;
-    margin-right: 0;
-  }
-
-  & > span {
-    margin-left: 1em;
-  }
-
-  & > div {
-    display: flex;
-
-    @media (max-width: 768px) {
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-  }
-`;
-
-const ExtrasDiv = styled.div`
-  ${sectionCss}
-
-  & > span {
-    /* margin-left: 1em; */
-  }
-`;
 
 const Home = () => {
   const [heroes, setHeroes] = useState([new Hero("bf")]);
@@ -149,7 +73,6 @@ const Home = () => {
     }
 
     db.defaults({ heroes: _heroes, hero: 35 }).write();
-
     setHeroes(db.get("heroes").value());
     setHero(db.get("hero").value());
   }, []);
@@ -234,67 +157,51 @@ const Home = () => {
 
   const currentHero = heroes[hero];
 
-  const importedHero = fromUrl()
+  const importedHero = fromUrl();
+  console.log(currentHero)
+  console.log(importedHero)
+  console.log(`heroes`, heroes) // in imported one it does not contain all heroes
+  console.log(`hero`, hero)
+
+
+  // seems like an ugly hack, not sure yet what is going on there ;)
+  if (heroes.length < 2) {
+    return <ThemeProvider theme={Theme.default}>
+      Loading...
+    </ThemeProvider>
+  }
 
 
   return (
     <ThemeProvider theme={Theme.default}>
       <>
-        <GlobalStyle />
+        <GlobalStyle/>
         <HomeDiv>
-          <Navbar heroOptions={heroes} onHeroChange={(id) => setHero(id)} />
+          <Navbar heroOptions={heroes} onHeroChange={(id) => setHero(id)}/>
           <ContentWrapper>
 
-            { !importedHero?.id && <Share hero={currentHero}/>}
-            { importedHero?.id && "Below is the hero someone shared with you."}
-
-            <UpperPanel>
-              <HeroCard hero={currentHero} size="700" />
-              <div style={{ width: "15px" }} />
-              <Stats
+            {!importedHero?.id && <>
+              <Share hero={currentHero}/>
+              <HeroView
                 hero={currentHero}
-                onStarChange={(n, v) => setStars(n, v)}
-                onRuneChange={(i, set) => setRune(i, set)}
-                onRuneClear={(i) => clearRune(i)}
-                onRuneStarChange={(i, v) => setRuneStars(i, v)}
-                onRuneLevelChange={(i, v) => setRuneLevel(i, v)}
-                onPrimaryChange={(i, p) => setPrimary(i, p)}
-                onSecondaryChange={(i, j, p) => setSecondary(i, j, p)}
+                setStars={setStars}
+                setRune={setRune}
+                clearRune={clearRune}
+                setRuneStars={setRuneStars}
+                setRuneLevel={setRuneLevel}
+                setPrimary={setPrimary}
+                setSecondary={setSecondary}
               />
-            </UpperPanel>
-            <LowerPanel>
-              {/* <SPDiv>
-                <span>Skills</span>
-                <div>
-                  <SPCard
-                    data={HeroesSP[currentHero.id]?.sp1}
-                    hero={currentHero}
-                    stars={1}
-                  ></SPCard>
-                  <SPCard
-                    data={HeroesSP[currentHero.id]?.sp2}
-                    hero={currentHero}
-                    stars={2}
-                  ></SPCard>
-                  <SPCard
-                    data={HeroesSP[currentHero.id]?.sp3}
-                    hero={currentHero}
-                    stars={3}
-                  ></SPCard>
-                  <SPCard
-                    data={HeroesSP[currentHero.id]?.sp4}
-                    hero={currentHero}
-                    stars={4}
-                  ></SPCard>
-                </div>
-              </SPDiv> */}
-              <ExtrasDiv>
-                <span>Extras</span>
-                <ExtraStats hero={currentHero} />
-              </ExtrasDiv>
-            </LowerPanel>
+            </>}
+            {importedHero?.id && <>
+              Below is the hero someone shared with you.
+               {/* apparently, need all the 'sets' or constructor from deserialized data... */}
+              <HeroView hero={new Hero(importedHero.id)}/>
+            </>}
+
+
           </ContentWrapper>
-          <Footer></Footer>
+          <Footer/>
         </HomeDiv>
       </>
     </ThemeProvider>
