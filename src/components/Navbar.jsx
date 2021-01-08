@@ -93,8 +93,8 @@ const Option = ({ ...props }) => {
 /****** Nav Component ******/
 
 const Navbar = (props) => {
-  const options = props.heroOptions.map((v, i) => {
-    return { value: i, icon: v.id, label: v.info("name") };
+  const options = props.heroOptions.map((v) => {
+    return { value: v, icon: v.id, label: v.info("name") };
   });
 
   return (

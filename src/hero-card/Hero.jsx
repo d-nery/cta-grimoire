@@ -77,15 +77,10 @@ const ExtrasDiv = styled.div`
   }
 `;
 
+
 export const Hero = ({
                        hero,
-                       setStars,
-                       setRune,
-                       clearRune,
-                       setRuneStars,
-                       setRuneLevel,
-                       setPrimary,
-                       setSecondary,
+                       updateHero = () => {},
                      }) =>
   <>
     <UpperPanel>
@@ -93,13 +88,34 @@ export const Hero = ({
       <div style={{ width: "15px" }}/>
       <Stats
         hero={hero}
-        onStarChange={(n, v) => setStars?.(n, v)}
-        onRuneChange={(i, set) => setRune?.(i, set)}
-        onRuneClear={(i) => clearRune?.(i)}
-        onRuneStarChange={(i, v) => setRuneStars?.(i, v)}
-        onRuneLevelChange={(i, v) => setRuneLevel?.(i, v)}
-        onPrimaryChange={(i, p) => setPrimary?.(i, p)}
-        onSecondaryChange={(i, j, p) => setSecondary?.(i, j, p)}
+        onStarChange={(n, v) => {
+          hero[n] = v;
+          updateHero(hero);
+        }}
+        onRuneChange={(i, set) => {
+          hero.setRune(i, set);
+          updateHero(hero);
+        }}
+        onRuneClear={(i) => {
+          hero.deleteRune(i);
+          updateHero(hero);
+        }}
+        onRuneStarChange={(i, v) => {
+          hero.setRuneStars(i, v);
+          updateHero(hero);
+        }}
+        onRuneLevelChange={(i, v) => {
+          hero.setRuneLevel(i, v);
+          updateHero(hero);
+        }}
+        onPrimaryChange={(i, p) => {
+          hero.setRunePrimaryBonus(i, p);
+          updateHero(hero);
+        }}
+        onSecondaryChange={(i, j, p) => {
+          hero.setRuneSecondaryBonus(i, j, p.value);
+          updateHero(hero);
+        }}
       />
     </UpperPanel>
     <LowerPanel>
