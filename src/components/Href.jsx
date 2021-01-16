@@ -4,6 +4,8 @@ import styled from "styled-components";
 export const Href = styled.a`
   color: white;
   &:hover {
-    color: purple;
+    text-decoration: none;
+    text-shadow: 3px 3px black;
+
   };
 `
