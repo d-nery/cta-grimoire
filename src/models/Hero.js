@@ -118,6 +118,34 @@ export default class Hero {
     return this._runes[slot];
   }
 
+  setRuneStars(runeIndex, stars) {
+    this.getRune(runeIndex).stars = stars
+    this._updateBonuses()
+  }
+
+  setRuneLevel(runeIndex, newLevel) {
+    const rune = this.getRune(runeIndex)
+    const { level, stars } = rune
+
+    // round to the max level, which depends on stars
+    if (level <= (stars * 5) / 10) {
+      rune.level = level * 10  + newLevel
+    } else {
+      rune.level = newLevel
+    }
+
+  }
+
+  setRunePrimaryBonus(runeIndex, primary) {
+    this.getRune(runeIndex).primary = primary.value
+    this._updateBonuses()
+  }
+
+  setRuneSecondaryBonus(runeIndex, secondarySlot, secondary) {
+    this.getRune(runeIndex)?.setSecondary(secondarySlot, secondary)
+    this._updateBonuses()
+  }
+
   setRune(slot, set) {
     if (slot < 0 || slot > 8) {
       return;
@@ -165,6 +193,9 @@ export default class Hero {
 }
 
 export const deserializeHero = (data) => {
+  if (!data.id) {
+    return
+  }
   let instance = new Hero();
   let serializedObject = JSON.parse(data);
   Object.assign(instance, serializedObject);
