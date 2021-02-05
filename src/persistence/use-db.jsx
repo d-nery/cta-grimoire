@@ -3,7 +3,7 @@ import LocalStorage from "lowdb/adapters/LocalStorage";
 import { dataToHero } from "../mappers/data-to-hero";
 
 export const db = low(
-  new LocalStorage("cta-grimoire-db-2", {
+  new LocalStorage("cta-grimoire-db-3", {
     deserialize: (data) => {
       let db = JSON.parse(data);
 

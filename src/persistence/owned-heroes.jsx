@@ -34,7 +34,7 @@ export const useOwnedHeroes = () => {
     const heroesFromDb = db.get("heroes").value();
     let _heroes = Object.keys(Heroes).map(k => new Hero(k));
     if (!heroesFromDb) {
-      db.defaults({ heroes: _heroes, hero: 35 }).write();
+      db.defaults({ heroes: _heroes, hero: 70 }).write();
       setHeroes(db.get("heroes").value());
     } else {
       setHeroes(heroesFromDb);
