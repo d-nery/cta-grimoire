@@ -119,31 +119,32 @@ export default class Hero {
   }
 
   setRuneStars(runeIndex, stars) {
-    this.getRune(runeIndex).stars = stars
-    this._updateBonuses()
+    this.getRune(runeIndex).stars = stars;
+    this._updateBonuses();
   }
 
   setRuneLevel(runeIndex, newLevel) {
-    const rune = this.getRune(runeIndex)
-    const { level, stars } = rune
+    const rune = this.getRune(runeIndex);
+    const { level, stars } = rune;
 
     // round to the max level, which depends on stars
     if (level <= (stars * 5) / 10) {
-      rune.level = level * 10  + newLevel
+      rune.level = level * 10 + newLevel;
     } else {
-      rune.level = newLevel
+      rune.level = newLevel;
     }
 
+    this._updateBonuses();
   }
 
   setRunePrimaryBonus(runeIndex, primary) {
-    this.getRune(runeIndex).primary = primary.value
-    this._updateBonuses()
+    this.getRune(runeIndex).primary = primary.value;
+    this._updateBonuses();
   }
 
   setRuneSecondaryBonus(runeIndex, secondarySlot, secondary) {
-    this.getRune(runeIndex)?.setSecondary(secondarySlot, secondary)
-    this._updateBonuses()
+    this.getRune(runeIndex)?.setSecondary(secondarySlot, secondary);
+    this._updateBonuses();
   }
 
   setRune(slot, set) {
